@@ -37,10 +37,14 @@ def talkToGpt(prompt, stream=False):
     if not stream:
         return completion.choices[0].message.content
     else:
+        final_output = ""
         for chunk in completion:
             if chunk is not None and chunk.choices[0].delta.content is not None:
-                print(chunk.choices[0].delta.content, end="")
+                content = chunk.choices[0].delta.content
+                yield content
+                final_output += content
+        return final_output
 
 
-talkToGpt("你好,帮我写一首诗,每句需要:看,满,花,水,结尾",
-          stream=True)
+for content in talkToGpt("你好,帮我写一首诗,每句需要:看,满,花,水,结尾", stream=True):
+    print(content, end="")
