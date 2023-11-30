@@ -19,7 +19,7 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 @app.get("/gpt/{item_id}")
 def read_item(item_id: str):
-    return talkToGpt("100+" + item_id + "是多少?", True)
+    return talkToGpt("100+" + item_id + "是多少?")
 
 
 if __name__ == "__main__":
