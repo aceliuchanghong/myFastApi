@@ -27,12 +27,10 @@ def talkToGpt(prompt, stream=False):
     completion = client.chat.completions.create(
         model="gpt-4-1106-preview",
         messages=[
-            # {"role": "system", "content": system_init},
             {"role": "user", "content": prompt}
         ],
         temperature=0.2,
-        stream=stream,
-        # finish_reason="stop"
+        stream=stream
     )
     if not stream:
         return completion.choices[0].message.content
@@ -46,5 +44,5 @@ def talkToGpt(prompt, stream=False):
         return final_output
 
 
-for content in talkToGpt("你好,帮我写一首诗,每句需要:看,满,花,水,结尾", stream=True):
-    print(content, end="")
+# for content in talkToGpt("你好,帮我写一首诗,每句需要:看,满,花,水,结尾", True):
+#     print(content, end="")
