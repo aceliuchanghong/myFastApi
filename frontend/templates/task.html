@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}title2 {% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block page_content %}
+{% include 'include/sidebar.html' %}
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col">
+            {{data.text|safe}}
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
