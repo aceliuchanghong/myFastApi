@@ -1,5 +1,4 @@
-### myFastApi
-
+# Information
 ### install
 
 #pip list --format=freeze > requirements.txt
@@ -18,4 +17,3 @@ pip install -r requirements.txt --proxy=127.0.0.1:10809
 ```url
 https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
 ```
-

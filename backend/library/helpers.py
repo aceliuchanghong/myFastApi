@@ -3,7 +3,7 @@ import markdown
 
 
 def openfile(filename):
-    filepath = os.path.join("pages/", filename)
+    filepath = os.path.join("backend/pages/", filename)
     with open(filepath, "r", encoding="utf-8") as input_file:
         text = input_file.read()
 
