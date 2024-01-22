@@ -29,5 +29,10 @@ async def task(request: Request, task_name: str):
     return templates.TemplateResponse("task.html", {"request": request, "data": data})
 
 
+@app.get("/answer", response_class=HTMLResponse)
+async def answer(request: Request, input_string: str):
+    return templates.TemplateResponse("task.html", {"request": request, "data": input_string + "data"})
+
+
 if __name__ == '__main__':
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
