@@ -7,18 +7,18 @@
 {% endblock %}
 
 {% block page_content %}
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col">
+            {{data.text|safe}}
+        </div>
+    </div>
+</main>
+
 <div class="container mt-4">
     <div class="row text-center">
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">主页</h5>
-                    <p class="card-text">这里是主页的相关内容描述。</p>
-                    <a href="/" class="btn btn-primary">访问</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">选项</h5>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">选项2</h5>
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">选项3</h5>
@@ -47,13 +47,6 @@
         </div>
     </div>
 </div>
-<main role="main" class="container">
-    <div class="row">
-        <div class="col">
-            {{data.text|safe}}
-        </div>
-    </div>
-</main>
 {% endblock %}
 
 {% block scripts %}
