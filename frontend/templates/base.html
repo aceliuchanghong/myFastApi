@@ -44,6 +44,28 @@
 <!-- Bootstrap JS -->
 <script src="{{ url_for('static', path='/others_js/bootstrap.bundle.min.js') }}"></script>
 <!-- jQuery Custom Scroller CDN -->
+<!-- Back to Top Button -->
+<a id="back-to-top" href="#" onclick="scrollToTop();return false;" title="Back to top" style="display: none;">↑
+    回到顶部</a>
+<script>
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("back-to-top").style.display = "block";
+        } else {
+            document.getElementById("back-to-top").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function scrollToTop() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
 </body>
 
 </html>

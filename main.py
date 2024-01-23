@@ -53,12 +53,5 @@ async def task(request: Request, task_name: str):
     return templates.TemplateResponse(f"task/{task_name}.html", {"request": request, "data": data})
 
 
-@app.post("/answer", response_class=HTMLResponse)
-async def answer(request: Request):
-    form_data = await request.form()
-    answer2 = form_data.get("answer2")
-    return templates.TemplateResponse("task/confirmation.html", {"request": request, "answer2": answer2})
-
-
 if __name__ == '__main__':
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
