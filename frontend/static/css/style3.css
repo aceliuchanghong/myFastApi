@@ -5,7 +5,7 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
-    background: #adb5bd;
+    background: #e6e9ec;
 }
 
 p {
@@ -13,7 +13,7 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #cce5ff;
+    color: #090a0a;
 }
 
 a,
@@ -85,7 +85,7 @@ a:focus {
 
 #dismiss:hover {
     background: #fff;
-    color: #7386D5;
+    color: #dce2fc;
 }
 
 .overlay {

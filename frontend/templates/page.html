@@ -1,14 +1,52 @@
 {% extends "base.html" %}
 
-{% block title %}title2 {% endblock %}
+{% block title %}page{% endblock %}
 
 {% block head %}
 {{ super() }}
 {% endblock %}
 
 {% block page_content %}
-{% include 'include/sidebar.html' %}
-
+<div class="container mt-4">
+    <div class="row text-center">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">主页</h5>
+                    <p class="card-text">这里是主页的相关内容描述。</p>
+                    <a href="/" class="btn btn-primary">访问</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">选项</h5>
+                    <p class="card-text">这里是选项的相关内容描述。</p>
+                    <a href="/task/answer" class="btn btn-primary">访问</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">选项2</h5>
+                    <p class="card-text">这里是选项2的相关内容描述。</p>
+                    <a href="/task/twoforms" class="btn btn-primary">访问</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">选项3</h5>
+                    <p class="card-text">这里是选项3的相关内容描述。</p>
+                    <a href="/task/accordion" class="btn btn-primary">访问</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <main role="main" class="container">
     <div class="row">
         <div class="col">

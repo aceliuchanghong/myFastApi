@@ -26,12 +26,14 @@ async def page(request: Request, page_name: str):
 @app.get("/task/{task_name}", response_class=HTMLResponse)
 async def task(request: Request, task_name: str):
     data = openfile(task_name + ".md")
-    return templates.TemplateResponse("task.html", {"request": request, "data": data})
+    return templates.TemplateResponse(f"task/{task_name}.html", {"request": request, "data": data})
 
 
-@app.get("/answer", response_class=HTMLResponse)
-async def answer(request: Request, input_string: str):
-    return templates.TemplateResponse("task.html", {"request": request, "data": input_string + "data"})
+@app.post("/answer", response_class=HTMLResponse)
+async def answer(request: Request):
+    form_data = await request.form()
+    answer2 = form_data.get("answer2")
+    return templates.TemplateResponse("task/confirmation.html", {"request": request, "answer2": answer2})
 
 
 if __name__ == '__main__':
