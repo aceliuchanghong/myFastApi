@@ -18,5 +18,6 @@ pip install -r requirements.txt --proxy=127.0.0.1:10809
 ```url
 https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
 https://www.bootstrap.cn/doc/read/123.html
+C:\Users\liuch\.conda\pkgs\jupyter_server-2.10.0-py310haa95532_0\Lib\site-packages\jupyter_server
 ```
 
