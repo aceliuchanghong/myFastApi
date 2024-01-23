@@ -1,22 +1,20 @@
 import uvicorn
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
+from backend.core.config import templates
 from backend.library.helpers import openfile
 from pydantic import BaseModel
+from backend.app.routes import router
 
 app = FastAPI()
-
-templates = Jinja2Templates(directory='frontend/templates')
+app.include_router(router)
 app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
 
 
 class Item(BaseModel):
     name: str
     description: str = None
-    price: float
-    tax: float = None
 
 
 @app.get("/", response_class=HTMLResponse)

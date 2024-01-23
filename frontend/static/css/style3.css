@@ -39,6 +39,35 @@ a:focus {
     border: none;
 }
 
+/* 应用到ul元素上，使其成为flex容器 */
+.navbar-nav {
+  display: flex;
+  justify-content: space-between; /* 使元素等间距排列，但不是等宽 */
+  flex-wrap: wrap;
+  list-style: none; /* 移除默认列表样式 */
+  padding: 0; /* 移除默认的padding */
+  margin: 0 auto; /* 水平居中并移除默认的margin */
+  max-width: 1200px; /* 假设内容区域的最大宽度是1200px */
+}
+
+/* 应用到li元素上 */
+.nav-item {
+  display: flex; /* 使得链接可以使用flex属性 */
+}
+
+/* 调整链接的内边距和显示 */
+.nav-link {
+  flex-grow: 1; /* 使链接平均分配空间 */
+  text-align: center;
+  padding: 0.5rem 1rem; /* 根据需要调整内边距 */
+}
+
+/* 容器可能需要一些内边距来与内容对齐 */
+.container {
+  padding: 0 15px; /* 根据需要调整，这应该与页面主要内容的内边距一致 */
+}
+
+
 .line {
     width: 100%;
     height: 1px;

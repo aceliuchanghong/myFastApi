@@ -9,7 +9,7 @@
     <meta name="description" content="Sisconsavior Starter">
     <meta name="author" content="Sisconsavior">
 
-    <title>Sisconsavior {% block title %}{% endblock %}</title>
+    <title>上海九州为信息科技有限公司 {% block title %}{% endblock %}</title>
     <link rel="icon" href="{{ url_for('static', path='/images/avatar3.png') }}" sizes="32x32"/>
 
     <!-- Bootstrap CSS CDN -->
@@ -36,6 +36,7 @@
 <div class="overlay"></div>
 
 {% block scripts %}
+{% endblock %}
 
 <script src="{{ url_for('static', path='/others_js/jquery-3.4.1.min.js') }}"></script>
 <!-- Popper.JS -->
@@ -43,7 +44,6 @@
 <!-- Bootstrap JS -->
 <script src="{{ url_for('static', path='/others_js/bootstrap.bundle.min.js') }}"></script>
 <!-- jQuery Custom Scroller CDN -->
-{% endblock %}
 </body>
 
 </html>
