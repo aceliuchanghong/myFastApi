@@ -45,15 +45,14 @@
 <script src="{{ url_for('static', path='/others_js/bootstrap.bundle.min.js') }}"></script>
 <!-- jQuery Custom Scroller CDN -->
 <!-- Back to Top Button -->
-<a id="back-to-top" href="#" onclick="scrollToTop();return false;" title="Back to top" style="display: none;">↑
-    回到顶部</a>
+<a id="back-to-top" href="#" onclick="scrollToTop();return false;" title="回到顶部" style="display: none;">↑</a>
 <script>
     window.onscroll = function () {
         scrollFunction();
     };
 
     function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
             document.getElementById("back-to-top").style.display = "block";
         } else {
             document.getElementById("back-to-top").style.display = "none";
@@ -67,5 +66,11 @@
     }
 </script>
 </body>
-
+{% block footer %}
+<footer class="py-5">
+  <div class="container-sm">
+    <p class="text-center mb-0" style="font-size: 0.8rem;">Copyright &copy; 2024</p>
+  </div>
+</footer>
+{% endblock %}
 </html>

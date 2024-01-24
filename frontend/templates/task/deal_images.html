@@ -1,21 +1,20 @@
-{% extends "task.html" %}
+{% extends "base.html" %}
 
 {% block page_content %}
-<div class="container mt-5">
-    <form action="/work/crawl_url" method="post" id="myForm1">
-        <div class="input-group mb-3">
-            <input type="text" name="answer2" class="form-control" placeholder="因为困难多壮志" aria-label="Recipient's username" id="inputText">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2" style="width: 6rem;">输入url</button>
-        </div>
-    </form>
-    <div id="output"></div>
+<!--输入文件-->
+<div class="mb-3">
+    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+    <input class="form-control" type="file" id="formFileMultiple" multiple>
 </div>
-<script>
-document.getElementById('myForm1').addEventListener('submit', function() {
-    var input = document.getElementById('inputText');
-    if (input.value.trim() === '') {
-        input.value = input.placeholder;
-    }
-});
-</script>
+<!--展示图片-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <figure class="figure">
+                <img src="/static/images/carousel/1.png" class="figure-img img-fluid rounded" alt="...">
+                <figcaption class="figure-caption">A caption for the above image.</figcaption>
+            </figure>
+        </div>
+    </div>
+</div>
 {% endblock %}

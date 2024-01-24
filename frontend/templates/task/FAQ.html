@@ -1,12 +1,216 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-
-<main role="main" class="container">
+<!--https://bootstrapdoc.com/docs/5.0/forms/form-control#file-input 输入文件-->
+<div class="mb-3">
+    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+    <input class="form-control" type="file" id="formFileMultiple" multiple>
+</div>
+<!--展示图片-->
+<div class="container">
     <div class="row">
-        <div class="col">
-            {{data.text|safe}}
+        <div class="col-md-4">
+            <figure class="figure">
+                <img src="/static/images/carousel/1.png" class="figure-img img-fluid rounded" alt="...">
+                <figcaption class="figure-caption">A caption for the above image.</figcaption>
+            </figure>
         </div>
     </div>
-</main>
+</div>
+<!--展示表单-->
+<fieldset>
+    <legend>Example legend</legend>
+    <p>
+        <label for="input">Example input</label>
+        <input type="text" id="input" placeholder="Example input">
+    </p>
+    <p>
+        <label for="email">Example email</label>
+        <input type="email" id="email" placeholder="lorem@ipsum.com">
+    </p>
+    <p>
+        <label for="tel">Example telephone</label>
+        <input type="tel" id="tel">
+    </p>
+    <p>
+        <label for="url">Example url</label>
+        <input type="url" id="url">
+    </p>
+    <p>
+        <label for="number">Example number</label>
+        <input type="number" id="number">
+    </p>
+    <p>
+        <label for="search">Example search</label>
+        <input type="search" id="search">
+    </p>
+    <p>
+        <label for="range">Example range</label>
+        <input type="range" id="range" min="0" max="10">
+    </p>
+    <p>
+        <label for="file">Example file input</label>
+        <input type="file" id="file">
+    </p>
+    <p>
+        <label for="select">Example select</label>
+        <select id="select">
+            <option value="">Choose...</option>
+            <optgroup label="Option group 1">
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+            </optgroup>
+            <optgroup label="Option group 2">
+                <option value="">Option 4</option>
+                <option value="">Option 5</option>
+                <option value="">Option 6</option>
+            </optgroup>
+        </select>
+    </p>
+    <p>
+        <label>
+            <input type="checkbox" value="">
+            Check this checkbox
+        </label>
+    </p>
+    <p>
+        <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+            Option one is this and that
+        </label>
+        <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+            Option two is something else that's also super long to demonstrate the wrapping of these fancy form
+            controls.
+        </label>
+        <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled="">
+            Option three is disabled
+        </label>
+    </p>
+    <p>
+        <label for="textarea">Example textarea</label>
+        <textarea id="textarea" rows="3"></textarea>
+    </p>
+    <p>
+        <label for="date">Example date</label>
+        <input type="date" id="date">
+    </p>
+    <p>
+        <label for="time">Example time</label>
+        <input type="time" id="time">
+    </p>
+    <p>
+        <label for="password">Example password</label>
+        <input type="password" id="password">
+    </p>
+    <p>
+        <label for="datetime-local">Example datetime-local</label>
+        <input type="datetime-local" id="datetime-local">
+    </p>
+    <p>
+        <label for="week">Example week</label>
+        <input type="week" id="week">
+    </p>
+    <p>
+        <label for="month">Example month</label>
+        <input type="month" id="month">
+    </p>
+    <p>
+        <label for="color">Example color</label>
+        <input type="color" id="color">
+    </p>
+    <p>
+        <label for="output">Example output</label>
+        <output name="result" id="output">100</output>
+    </p>
+    <p>
+        <button type="submit">Button submit</button>
+        <input type="submit" value="Input submit button">
+        <input type="reset" value="Input reset button">
+        <input type="button" value="Input button">
+    </p>
+    <p>
+        <button type="submit" disabled="">Button submit</button>
+        <input type="submit" value="Input submit button" disabled="">
+        <input type="reset" value="Input reset button" disabled="">
+        <input type="button" value="Input button" disabled="">
+    </p>
+</fieldset>
+<!--展示视频-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6"> <!-- 你可以根据需要改变这个栅格类 -->
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="/static/mp4/blur-tool.mp4"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!--展示表单2-->
+<form class="row g-3 needs-validation" novalidate>
+  <div class="col-md-4">
+    <label for="validationCustom01" class="form-label">First name</label>
+    <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Last name</label>
+    <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustomUsername" class="form-label">Username</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="inputGroupPrepend">@</span>
+      <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <label for="validationCustom03" class="form-label">City</label>
+    <input type="text" class="form-control" id="validationCustom03" required>
+    <div class="invalid-feedback">
+      Please provide a valid city.
+    </div>
+  </div>
+  <div class="col-md-3">
+    <label for="validationCustom04" class="form-label">State</label>
+    <select class="form-select" id="validationCustom04" required>
+      <option selected disabled value="">Choose...</option>
+      <option>...</option>
+    </select>
+    <div class="invalid-feedback">
+      Please select a valid state.
+    </div>
+  </div>
+  <div class="col-md-3">
+    <label for="validationCustom05" class="form-label">Zip</label>
+    <input type="text" class="form-control" id="validationCustom05" required>
+    <div class="invalid-feedback">
+      Please provide a valid zip.
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+      <label class="form-check-label" for="invalidCheck">
+        Agree to terms and conditions
+      </label>
+      <div class="invalid-feedback">
+        You must agree before submitting.
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </div>
+</form>
 {% endblock %}

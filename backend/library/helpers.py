@@ -6,13 +6,18 @@ import re
 
 def openfile(filename):
     filepath = os.path.join("backend/pages/", filename)
-    with open(filepath, "r", encoding="utf-8") as input_file:
-        text = input_file.read()
+    if not os.path.exists(filepath):
+        data = {
+            "text": f"no {filename}.md file"
+        }
+    else:
+        with open(filepath, "r", encoding="utf-8") as input_file:
+            text = input_file.read()
 
-    html = markdown.markdown(text)
-    data = {
-        "text": html
-    }
+        html = markdown.markdown(text)
+        data = {
+            "text": html
+        }
     return data
 
 

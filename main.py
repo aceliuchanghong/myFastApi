@@ -50,7 +50,8 @@ async def page(request: Request, page_name: str):
 @app.get("/task/{task_name}", response_class=HTMLResponse)
 async def task(request: Request, task_name: str):
     data = openfile(task_name + ".md")
-    return templates.TemplateResponse(f"task/{task_name}.html", {"request": request, "data": data})
+    return templates.TemplateResponse(f"task/{task_name}.html",
+                                      {"request": request, "data": data, "active_page": task_name})
 
 
 if __name__ == '__main__':
