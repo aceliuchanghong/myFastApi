@@ -154,10 +154,15 @@ async def test_get_user(token: str = Depends(oauth2_schema)):
         username = None
         token_data = jwt.decode(token, SECURITY_KEY, ALGORITHMS)
         if token_data:
+            current_time = datetime.now(timezone.utc)
+            exp = datetime.fromtimestamp(token_data.get("exp"), timezone.utc)
+            if current_time >= exp:
+                raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Token 已过期")
             username = token_data.get("username", None)
-            # TODO 时间校验
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Token 已过期")
     except Exception as error:
-        raise unauth
+        raise unauth from error
     if not username:
         raise unauth
     return username
