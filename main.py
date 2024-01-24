@@ -9,14 +9,17 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from backend.core.config import templates
 from backend.library.helpers import openfile
 from backend.app.routes import router
+from backend.app.test_routes import router2
 
 app = FastAPI()
 app.include_router(router)
+app.include_router(router2)
+
 app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
 
 
 @app.exception_handler(TemplateNotFound)
-async def template_not_found_handler(request, exc):
+async def template_not_found_handler(request):
     # 当模板未找到时，返回自定义的404页面
     return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
 
