@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col">
+            {{data.text|safe}}
+        </div>
+    </div>
+</main>
+{% endblock %}

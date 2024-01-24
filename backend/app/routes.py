@@ -13,17 +13,33 @@ async def page(request: Request):
     return templates.TemplateResponse("info.html", {"request": request})
 
 
-@router.post("/answer", response_class=HTMLResponse)
+@router.post("/work/crawl_url", response_class=HTMLResponse)
 async def answer(request: Request):
     form_data = await request.form()
     answer2 = form_data.get("answer2")
     if answer2 == "因为困难多壮志":
-        return templates.TemplateResponse("task/confirmation.html", {"request": request, "answer2": answer2})
-    if is_valid_url(answer2):
+        return templates.TemplateResponse("task/crawl_url_confirmation.html", {"request": request, "answer2": answer2})
+    if is_valid_url(answer2) and re.match(url_regex, answer2):
         loader = WebBaseLoader(answer2)
         docs = loader.load()
         for doc in docs:
             answer2 = doc.page_content
-        return templates.TemplateResponse("task/confirmation.html", {"request": request, "answer2": answer2})
+        return templates.TemplateResponse("task/crawl_url_confirmation.html", {"request": request, "answer2": answer2})
     else:
-        return templates.TemplateResponse("task/confirmation.html", {"request": request, "answer2": "不合法连接"})
+        return templates.TemplateResponse("task/crawl_url_confirmation.html",
+                                          {"request": request, "answer2": "不合法连接"})
+
+
+@router.get("/work/deal_images", response_class=HTMLResponse)
+async def page(request: Request):
+    return templates.TemplateResponse("info.html", {"request": request})
+
+
+@router.get("/work/make_pay", response_class=HTMLResponse)
+async def page(request: Request):
+    return templates.TemplateResponse("info.html", {"request": request})
+
+
+@router.get("/work/没想好", response_class=HTMLResponse)
+async def page(request: Request):
+    return templates.TemplateResponse("info.html", {"request": request})
