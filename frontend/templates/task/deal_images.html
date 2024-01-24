@@ -1,20 +1,102 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<!--输入文件-->
-<div class="mb-3">
-    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
-    <input class="form-control" type="file" id="formFileMultiple" multiple>
-</div>
-<!--展示图片-->
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <figure class="figure">
-                <img src="/static/images/carousel/1.png" class="figure-img img-fluid rounded" alt="...">
-                <figcaption class="figure-caption">A caption for the above image.</figcaption>
-            </figure>
-        </div>
-    </div>
-</div>
+<main role="main" class="container">
+    <fieldset>
+        <!--输入文件-->
+        <p>
+            <label for="file">选择图片文件</label>
+            <input type="file" id="file">
+        </p>
+        <!--选择格式-->
+        <p>
+            <label for="select">选择需要转化成的格式</label>
+            <select id="select">
+                <option value="jpg">jpg</option>
+                <option value="png">png</option>
+                <option value="jpeg">jpeg</option>
+                <!--                <optgroup label="Option group 2">-->
+                <!--                    <option value="">Option 4</option>-->
+                <!--                    <option value="">Option 5</option>-->
+                <!--                    <option value="">Option 6</option>-->
+                <!--                </optgroup>-->
+            </select>
+        </p>
+        <!--输入文件名称-->
+        <p>
+            <label for="input">输出的文件名字</label>
+            <input type="text" id="input" placeholder="Example input">
+        </p>
+        <!--提交按钮-->
+        <p>
+            <button id="submitBtn" type="button">提交任务</button>
+        </p>
+    </fieldset>
+</main>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', path='/others_js/jquery-3.4.1.min.js') }}"></script>
+<!--<script type="text/javascript">-->
+<!--    $(document).ready(function () {-->
+<!--        $('#submitBtn').click(function (e) {-->
+<!--            e.preventDefault();-->
+<!--            var formData = new FormData();-->
+<!--            formData.append('file', $('#file')[0].files[0]);-->
+<!--            formData.append('format', $('#select').val());-->
+<!--            formData.append('filename', $('#input').val());-->
+
+<!--            $.ajax({-->
+<!--                url: '/work/deal_images', // 替换成您的服务器端点-->
+<!--                type: 'POST',-->
+<!--                data: formData,-->
+<!--                processData: false, // 告诉jQuery不要去处理发送的数据-->
+<!--                contentType: false, // 告诉jQuery不要去设置Content-Type请求头-->
+<!--                success: function (response) {-->
+<!--                    // 这里处理成功后的逻辑，比如跳转到新页面或显示信息-->
+<!--                    window.location.href = response.redirect; // 假设服务器返回了一个重定向的路径-->
+<!--                },-->
+<!--                error: function (xhr, status, error) {-->
+<!--                    // 这里处理错误的逻辑-->
+<!--                    console.error("An error occurred: " + status + " " + error);-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<script>
+    $(document).ready(function () {
+        $("#submitBtn").click(function () {
+            var formData = new FormData();
+            var fileInput = $('#file')[0];
+            var selectedFormat = $('#select').val();
+            var outputFileName = $('#input').val();
+
+            // 确保文件被选中
+            if (fileInput.files.length > 0) {
+                formData.append("file", fileInput.files[0]);
+                formData.append("format", selectedFormat);
+                formData.append("outputName", outputFileName);
+
+                // 使用jQuery的ajax方法提交表单数据
+                $.ajax({
+                    url: '/work/deal_images',  // 目标资源
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,    // 不要设置任何的头信息，因为我们需要multipart/form-data
+                    processData: false,    // 不要处理发送的数据，因为我们需要发送一个FormData对象，它已经是正确的格式了
+                    success: function (response) {
+                        console.log('Image processing request sent successfully.');
+                        // 这里可以添加代码来处理服务器的响应
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('An error occurred: ' + error);
+                        // 这里可以添加代码来处理请求失败后的情况
+                    }
+                });
+            } else {
+                alert("Please select a file to upload.");
+            }
+        });
+    });
+</script>
 {% endblock %}

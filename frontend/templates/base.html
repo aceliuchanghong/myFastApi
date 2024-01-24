@@ -31,6 +31,7 @@
 
         {% block page_content %}
         {% endblock %}
+        {% include 'include/footer.html' %}
     </div>
 </div>
 <div class="overlay"></div>
@@ -66,11 +67,4 @@
     }
 </script>
 </body>
-{% block footer %}
-<footer class="py-5">
-  <div class="container-sm">
-    <p class="text-center mb-0" style="font-size: 0.8rem;">Copyright &copy; 2024</p>
-  </div>
-</footer>
-{% endblock %}
 </html>
