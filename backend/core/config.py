@@ -9,3 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # 初始化Jinja2Templates实例，指定模板文件夹的绝对路径
 templates = Jinja2Templates(directory=str(BASE_DIR / 'frontend/templates'))
+
+PROXY = False
+proxies = {
+    "http": "http://127.0.0.1:10809",
+    "https": "http://127.0.0.1:10809"
+}
