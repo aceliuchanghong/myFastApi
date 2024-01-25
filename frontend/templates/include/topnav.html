@@ -34,6 +34,25 @@
                             <a class="nav-link" href="/task/FAQ">常见问题</a>
                             <!-- frequently asked questions-->
                         </li>
+                        <li class="nav-item dropdown {{ 'active' if active_page == 'FAQ' else '' }}">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">
+                                下拉框
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item dropdown-toggle" href="#">问题分类1</a>
+                                <div class="dropdown-submenu">
+                                    <a class="dropdown-item" href="/faq/category1/item1">问题1</a>
+                                    <a class="dropdown-item" href="/faq/category1/item2">问题2</a>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item dropdown-toggle" href="#">问题分类2</a>
+                                <div class="dropdown-submenu">
+                                    <a class="dropdown-item" href="/faq/category2/item1">问题3</a>
+                                    <a class="dropdown-item" href="/faq/category2/item2">问题4</a>
+                                </div>
+                            </div>
+                        </li>
                         <li class="nav-item {{ 'active' if active_page == 'about_us' else '' }}">
                             <a class="nav-link" href="/task/about_us">关于我们</a>
                         </li>
@@ -43,3 +62,19 @@
         </div>
     </div>
 </nav>
+<script>
+    $(document).ready(function () {
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).next().toggleClass('show');
+            }
+            $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+            return false;
+        });
+
+        // 点击其他地方时关闭所有的下拉菜单
+        $(document).on('click', function (e) {
+            $('.dropdown-submenu .show').removeClass('show');
+        });
+    });
+</script>
