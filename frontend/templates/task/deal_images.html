@@ -35,34 +35,6 @@
 </main>
 {% endblock %}
 {% block scripts %}
-<script src="{{ url_for('static', path='/others_js/jquery-3.4.1.min.js') }}"></script>
-<!--<script type="text/javascript">-->
-<!--    $(document).ready(function () {-->
-<!--        $('#submitBtn').click(function (e) {-->
-<!--            e.preventDefault();-->
-<!--            var formData = new FormData();-->
-<!--            formData.append('file', $('#file')[0].files[0]);-->
-<!--            formData.append('format', $('#select').val());-->
-<!--            formData.append('filename', $('#input').val());-->
-
-<!--            $.ajax({-->
-<!--                url: '/work/deal_images', // 替换成您的服务器端点-->
-<!--                type: 'POST',-->
-<!--                data: formData,-->
-<!--                processData: false, // 告诉jQuery不要去处理发送的数据-->
-<!--                contentType: false, // 告诉jQuery不要去设置Content-Type请求头-->
-<!--                success: function (response) {-->
-<!--                    // 这里处理成功后的逻辑，比如跳转到新页面或显示信息-->
-<!--                    window.location.href = response.redirect; // 假设服务器返回了一个重定向的路径-->
-<!--                },-->
-<!--                error: function (xhr, status, error) {-->
-<!--                    // 这里处理错误的逻辑-->
-<!--                    console.error("An error occurred: " + status + " " + error);-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 <script>
     $(document).ready(function () {
         $("#submitBtn").click(function () {
