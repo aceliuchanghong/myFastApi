@@ -62,19 +62,3 @@
         </div>
     </div>
 </nav>
-<script>
-    $(document).ready(function () {
-        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
-            if (!$(this).next().hasClass('show')) {
-                $(this).next().toggleClass('show');
-            }
-            $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
-            return false;
-        });
-
-        // 点击其他地方时关闭所有的下拉菜单
-        $(document).on('click', function (e) {
-            $('.dropdown-submenu .show').removeClass('show');
-        });
-    });
-</script>

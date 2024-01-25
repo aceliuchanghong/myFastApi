@@ -1,3 +1,5 @@
+import shutil
+from pathlib import Path
 from typing import Optional
 
 from fastapi import APIRouter, Request
@@ -76,3 +78,23 @@ async def page(request: Request):
 @router.get("/work/没想好", response_class=HTMLResponse)
 async def page(request: Request):
     return templates.TemplateResponse("info.html", {"request": request})
+
+
+@router.post("/work/upload_file")
+async def upload_file(file: UploadFile = File(...)):
+    # 保存文件或进行其他处理
+    file_directory = Path("testfiles")
+    file_directory.mkdir(exist_ok=True)
+    file_location = file_directory / file.filename  # 构建文件路径
+
+    # 使用异步方式写入文件
+    with file_location.open("wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    print({"filename": file.filename})
+    return {"filename": file.filename}
+
+
+@router.post("/work/submit_form")
+async def submit_form(username: str = Form(...), email: str = Form(...)):
+    print({"username": username, "email": email})
+    return {"username": username, "email": email}
