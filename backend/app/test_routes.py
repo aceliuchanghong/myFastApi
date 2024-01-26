@@ -9,8 +9,9 @@ from fastapi import APIRouter, Path, Query, Body, Cookie, Header, Depends
 from starlette.exceptions import HTTPException
 from starlette.status import *
 
-from backend.app.models import Token
 from fastapi.security import OAuth2PasswordBearer
+
+from backend.app.models.models import Token
 
 router2 = APIRouter()
 
