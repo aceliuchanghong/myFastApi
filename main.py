@@ -1,42 +1,52 @@
-import uvicorn
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
-from jinja2 import TemplateNotFound
-from starlette.staticfiles import StaticFiles
-from starlette.status import HTTP_404_NOT_FOUND
-from starlette.exceptions import HTTPException as StarletteHTTPException
-
-from backend.core.config import templates
-from backend.library.helpers import openfile
-from backend.app.routes import router
-from backend.app.test_routes import router2
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from passlib.context import CryptContext
+from fastapi import Depends
+import uvicorn
+from backend_prd.api.routes import audio, image, video, webpage
+from backend_prd.api.routes.auth import auth_router
+from backend_prd.core.database import create_tables, close_db_connection
+from backend_prd.core.exception_handlers import *
 
 app = FastAPI()
-app.include_router(router)
-app.include_router(router2)
+templates = Jinja2Templates(directory="frontend_prd/templates")
+app.mount("/static", StaticFiles(directory="frontend_prd/static"), name="static")
+app.add_event_handler("startup", create_tables)
+app.add_event_handler("shutdown", close_db_connection)
+app.add_exception_handler(StarletteHTTPException, http_exception_handler)
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
+app.add_exception_handler(SQLAlchemyError, sqlalchemy_exception_handler)
+app.add_exception_handler(Exception, general_exception_handler)
 
-app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
-
-
-@app.exception_handler(TemplateNotFound)
-async def template_not_found_handler(request):
-    # 当模板未找到时，返回自定义的404页面
-    return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
-
-
-@app.exception_handler(StarletteHTTPException)
-async def custom_http_exception_handler(request, exc):
-    if exc.status_code == HTTP_404_NOT_FOUND:
-        return templates.TemplateResponse("404.html", {"request": request})
-    # 如果不是404错误，可以继续抛出异常或者处理其他错误
-    raise exc
+security = HTTPBasic()
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 @app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    data = openfile("home.md")
-    return templates.TemplateResponse("page.html", {"request": request, "data": data})
+def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
+
+@app.post("/register")
+def register(username: str = Form(...), password: str = Form(...)):
+    # Your registration logic here
+    return {"message": "User registered successfully"}
+
+
+@app.post("/login")
+def login(credentials: HTTPBasicCredentials = Depends(security)):
+    # Your login logic here
+    return {"message": "Login successful"}
+
+
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+app.include_router(audio.router, prefix="/audio", tags=["Audio"])
+app.include_router(image.router, prefix="/image", tags=["Image"])
+app.include_router(video.router, prefix="/video", tags=["Video"])
+app.include_router(webpage.router, prefix="/webpage", tags=["Webpage"])
 
 if __name__ == '__main__':
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=2024, reload=True)

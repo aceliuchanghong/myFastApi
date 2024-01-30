@@ -1,3 +1,16 @@
+初始化:
+使用的后端是fastapi,前端bootstrap+jinja2,已经引入了
+```
+<script src="{{ url_for('static', path='/others_js/jquery-3.7.1.min.js') }}"></script>
+<!-- Popper.JS -->
+<script src="{{ url_for('static', path='/others_js/popper.min.js') }}"></script>
+<!-- Bootstrap JS -->
+<script src="{{ url_for('static', path='/others_js/bootstrap.bundle.min.js') }}"></script>
+```
+请尽量使用已有的脚本完成以下任务
+
+
+
 我需要一个fastapi+bootstrap编写的前后端工程,其会在项目的不同部分中进行开发,大致目的是提供不同的服务在左边选项,用户点击之后
 可以选择创建一个对应任务,然后填写对应任务他所需要的表单信息,点击提交,就可以了,然后可以查看任务进度,项目结构如下:
 ```

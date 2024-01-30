@@ -1,75 +1,84 @@
-初始化:
-使用的后端是fastapi,前端bootstrap+jinja2,已经引入了
-```
-<script src="{{ url_for('static', path='/others_js/jquery-3.7.1.min.js') }}"></script>
-<!-- Popper.JS -->
-<script src="{{ url_for('static', path='/others_js/popper.min.js') }}"></script>
-<!-- Bootstrap JS -->
-<script src="{{ url_for('static', path='/others_js/bootstrap.bundle.min.js') }}"></script>
-```
-请尽量使用已有的脚本完成以下任务
-
-
-这个是之前我参考的别人的项目的项目结构,使用FastApi+bootstrap+jquery+jinja2+sqlite开发,并且将md文件嵌入fastapi
-```示例
-def openfile(filename):
-    filepath = os.path.join("app/pages/", filename)
-    with open(filepath, "r", encoding="utf-8") as input_file:
-        text = input_file.read()
-    html = markdown.markdown(text)
-    data = {
-        "text": html
-    }
-    return data
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    data = openfile("home.md")
-    return templates.TemplateResponse("page.html", {"request": request, "data": data})
-```
-```
+这个是项目结构,使用FastApi+bootstrap+jquery+jinja2+sqlite开发,并且将md文件嵌入fastapi,后端暂时略去
+```项目框架
 myFastApi/
 |
+├── LICENSE
+├── README.md
+├── config.py
 ├── main.py
 ├── requirements.txt
-├── backend/
+├── backend_prd/
 │   ├── api/
-│   ├── app/
-│   │   ├── models.py
-│   │   ├── routes.py
-│   │   ├── schemas.py
-│   │   └── test_routes.py
-│   ├── core/
-│   │   ├── config.py
-│   │   └── database.py
-│   ├── library/
-│   │   └── helpers.py
-│   └── pages/
-│       ├── FAQ.md
-│       ├── about.md
-│       ├── about_us.md
-│       ├── accordion.md
-│       ├── contact.md
-│       ├── crawl_url.md
-│       ├── deal_images.md
-│       ├── home.md
-└── frontend/
-    ├── static/
-    │   ├── css/
-    │   │   ├── mystyle.css
-    │   │   └── style3.css
-    │   ├── others_css/
-    │   │   └── bootstrap.min.css
-    │   └── others_js/
-    │       ├── bootstrap.bundle.min.js
-    │       ├── jquery.min.js
-    └── templates/
-        ├── 404.html
-        ├── base.html
-        ├── error.html
-        ├── info.html
-        ├── login.html
-        ├── logout.html
-        ├── page.html
-        ├── task.html
+│   │   ├── models/
+│   │   │   ├── audio.py
+│   │   │   ├── image.py
+│   │   │   ├── user.py
+│   │   │   ├── video.py
+│   │   │   └── webpage.py
+│   │   ├── routes/
+│   │   │   ├── audio.py
+│   │   │   ├── auth.py
+│   │   │   ├── image.py
+│   │   │   ├── video.py
+│   │   │   └── webpage.py
+│   │   └── schemas/
+│   │       ├── audio.py
+│   │       ├── image.py
+│   │       ├── user.py
+│   │       ├── video.py
+│   │       └── webpage.py
+│   └── core/
+│       ├── audio_processor.py
+│       ├── database.py
+│       ├── image_processor.py
+│       ├── security.py
+│       ├── video_processor.py
+│       └── webpage_scraper.py
+└── utils/
+    └── markdown.py
 ```
-我现在也需要设计一个类似的项目,开发,帮我参考以上结构优化项目backend的设计,帮我设想一下backend的目录层次
+项目有
+1. 用户登录注册
+2. 提供4个大的功能,视频文件处理,网页爬取,音频文件处理,图片处理
+
+```main.py
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from passlib.context import CryptContext
+from fastapi import Depends
+
+from backend_prd.api.routes import audio, image, video, webpage
+from backend_prd.api.routes.auth import auth_router
+from backend_prd.core.database import create_tables, close_db_connection
+
+app = FastAPI()
+templates = Jinja2Templates(directory="frontend_prd/templates")
+app.mount("/static", StaticFiles(directory="frontend_prd/static"), name="static")
+app.add_event_handler("startup", create_tables)
+app.add_event_handler("shutdown", close_db_connection)
+
+security = HTTPBasic()
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.post("/register")
+def register(username: str = Form(...), password: str = Form(...)):
+    # Your registration logic here
+    return {"message": "User registered successfully"}
+@app.post("/login")
+def login(credentials: HTTPBasicCredentials = Depends(security)):
+    # Your login logic here
+    return {"message": "Login successful"}
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+app.include_router(audio.router, prefix="/audio", tags=["Audio"])
+app.include_router(image.router, prefix="/image", tags=["Image"])
+app.include_router(video.router, prefix="/video", tags=["Video"])
+app.include_router(webpage.router, prefix="/webpage", tags=["Webpage"])
+```
+帮我优化一下main
