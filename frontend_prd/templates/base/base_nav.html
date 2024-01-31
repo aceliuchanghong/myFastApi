@@ -2,9 +2,10 @@
     <div class="container">
         <!-- Brand -->
         <a class="navbar-brand" href="/">
-            <img alt="Image placeholder" src="{{ url_for('static', path='/images/dark.svg') }}" id="navbar-logo">
+            <img alt="Image placeholder" src="{{ url_for('static', path='/images/avatar3-min.svg') }}" id="navbar-logo">
         </a>
         <!-- Toggler -->
+        <!-- TODO:不知道为什么手机点不开 -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,34 +13,38 @@
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="/">Overview</a>
-                </li>
                 <li class="nav-item dropdown dropdown-animate" data-toggle="hover">
                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">Pages</a>
-                    <div class="dropdown-menu dropdown-menu-single">
+                       aria-expanded="false">Overview</a>
+                    <div class="dropdown-menu dropdown-menu">
                         <a href="/" class="dropdown-item">Homepage</a>
                         <a href="/Pages/About" class="dropdown-item">About us</a>
                         <a href="/Pages/Contact" class="dropdown-item">Contact</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown dropdown-animate" data-toggle="hover">
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">Functions</a>
+                    <div class="dropdown-menu dropdown-menu-single">
+                        <a href="/Pages/Crawl" class="dropdown-item">web_page_crawl</a>
                         <div class="dropdown-divider"></div>
-                        <a href="/Pages/Login" class="dropdown-item">web_page_crawl</a>
+                        <a href="/Pages/Image" class="dropdown-item">image_deal</a>
+                        <a href="/Pages/Audio" class="dropdown-item">audio_deal</a>
+                        <a href="/Pages/Video" class="dropdown-item">video_deal</a>
                     </div>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="/Docs">Docs</a>
                 </li>
             </ul>
-            <!-- Button -->
+            <!-- Button 注册/登录 -->
             <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="/Login">
-                注册/登录
+                Sign up/Sign in
             </a>
             <!-- Mobile button -->
             <div class="d-lg-none text-center">
-                <a href="/" class="btn btn-block btn-sm btn-warning">登录mm</a>
+                <a href="/Login" class="btn btn-block btn-sm btn-warning">登录mm</a>
             </div>
-<!--            头像-->
-<!--            <span class="avatar bg-primary text-white rounded-circle avatar-sm">TC</span>-->
         </div>
     </div>
 </nav>
