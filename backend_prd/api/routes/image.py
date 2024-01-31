@@ -1,5 +1,9 @@
+import os
+
 from fastapi import APIRouter, Request, UploadFile, Form, File
 from fastapi.responses import HTMLResponse, JSONResponse
+
+from utils.path_valid import validate_output_path
 
 router = APIRouter()
 
@@ -33,11 +37,16 @@ def delete_image(image_id: int):
 async def process_info(request: Request, file: UploadFile = File(...), input_task_name: str = Form(...),
                        input_user_name: str = Form(...),
                        radio_value: str = Form(...), checkbox_value: bool = Form(...)):
+    # 创建文件路径
+    directory = f"testfiles/{input_user_name}/{input_task_name}"
+    # 确保目录存在
+    validate_output_path(directory)
+    # 拼接完整的文件路径
+    file_location = os.path.join(directory, file.filename)
 
-    file_location = f"testfiles/{input_user_name}/{input_task_name}/name"
     print(radio_value, checkbox_value)
     with open(file_location, "wb+") as file_object:
-        file_object.write(file.read())
+        file_content = await file.read()  # 使用await来异步读取文件
+        file_object.write(file_content)
 
     print({"message": "Upload successful"})
-    return JSONResponse(content={"redirect": "/Pages/Task"})

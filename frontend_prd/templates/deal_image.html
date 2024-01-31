@@ -131,10 +131,10 @@
             // 构建要传递给后端的数据
             var formData = new FormData();
             formData.append('file', $('#fileUpload')[0].files[0]);
-            formData.append('inputName', inputName);
-            formData.append('inputName4', inputName4);
-            formData.append('radioValue', radioValue);
-            formData.append('checkboxValue', checkboxValue);
+            formData.append('input_task_name', inputName); // Assuming inputName contains the task name
+            formData.append('input_user_name', inputName4); // Assuming inputName4 contains the user name
+            formData.append('radio_value', radioValue);
+            formData.append('checkbox_value', checkboxValue);
 
             // 发送POST请求
             $.ajax({
@@ -163,6 +163,7 @@
                 error: function (error) {
                     $('#uploadStatus').text('Upload failed');
                     console.log(error);
+                    console.log(formData);
                 }
             });
         });
