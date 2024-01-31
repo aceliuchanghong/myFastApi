@@ -2,25 +2,47 @@
 
 {% block Main %}
 <div class="container">
-    <div class="form-group">
-        <input id="inputText2" name="input" type="text" class="form-control" placeholder="因为困难多壮志">
+    <!--输入框-->
+    <div class="form-group2">
+        <input id="inputText2" name="input" type="text" class="form-control border-2" placeholder="因为困难多壮志">
     </div>
+    <br>
+    <!--勾选框-->
     <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault2">
         <label class="form-check-label" for="flexSwitchCheckDefault2">Proxy Open</label>
     </div>
     <br>
+    <!--提交按钮-->
     <button id="submitButton2" type="button" class="btn btn-primary">
         提交
     </button>
     <br>
+    <!--输出框-->
     <div class="mb-3" id="outputDiv" style="position: relative; overflow: auto;">
         <label for="exampleFormControlTextarea1" class="form-label"></label>
-        <textarea id="codeBlock" class="form-control"
+        <textarea id="codeBlock" class="form-control border-2"
                   style="resize: vertical; height: 500px; white-space: pre-wrap;">
         </textarea>
         <br>
         <button id="copyButton" class="btn btn-secondary btn-sm">Copy</button>
+    </div>
+    <!--弹出框-->
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="myToast">
+        <div class="toast-header">
+            <svg class="bd-placeholder-img rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                 preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                <rect fill="#007aff" width="100%" height="100%"/>
+            </svg>
+            <strong class="mr-auto"></strong>
+            <small class="text-muted">just now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            已提交,正在爬取,请稍后
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -35,14 +57,19 @@
                 inputText = $("#inputText2").attr("placeholder");
             }
             var checkboxState = $("#flexSwitchCheckDefault2").is(":checked");
-
+            // 显示弹出框
+            $('#myToast').toast('show');
+            // 设置toast显示时间为2秒
+            setTimeout(function () {
+                $('#myToast').toast('hide');
+            }, 800);
             $.ajax({
                 type: 'POST',
                 url: '/webpage/info',
                 data: JSON.stringify({inputText: inputText, checkboxState: checkboxState}),
                 contentType: 'application/json',
                 success: function (response) {
-                    $("#codeBlock").text(response.output_text); // Update this line
+                    $("#codeBlock").text(response.output_text);
                     console.log(response);
                 },
                 error: function (error) {
@@ -65,6 +92,11 @@
             copyToClipboard(textToCopy);
         });
 
+        // 关闭toast
+        $(".toast .close").click(function () {
+            $(".toast").toast('hide');
+        });
+
 
         // 绑定点击按钮事件
         $("#submitButton2").click(submitAction);
@@ -78,6 +110,17 @@
         });
     });
 </script>
+{% endblock %}
+
+{% block css %}
+<style>
+    .toast {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 9999;
+    }
+</style>
 {% endblock %}
 
 {% block footer %}

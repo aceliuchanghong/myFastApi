@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 router = APIRouter()
 
@@ -26,3 +26,8 @@ def update_image(image_id: int):
 @router.delete("/{image_id}")
 def delete_image(image_id: int):
     return {"message": f"Delete image {image_id}"}
+
+
+@router.post("/fix")
+async def process_info(request: Request):
+    pass

@@ -1,0 +1,121 @@
+{% extends "base/base.html" %}
+
+{% block Main %}
+<div class="container">
+    <form>
+        <!-- 文件上传 -->
+        <div class="form-group row">
+            <label for="fileUpload" class="col-sm-2 col-form-label">File Upload</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" id="fileUpload">
+            </div>
+        </div>
+        <!-- 进度条 -->
+        <div class="form-group row">
+            <div class="col-sm-2">Upload Progress</div>
+            <div class="col-sm-10">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="uploadProgress" style="width: 0%;"
+                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!--输入框-->
+        <div class="form-group row">
+            <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputName3">
+            </div>
+        </div>
+        <!--选项1-->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
+                               checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            First radio
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                        <label class="form-check-label" for="gridRadios2">
+                            Second radio
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!--选项2-->
+        <div class="form-group row">
+            <div class="col-sm-2">Checkbox</div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                    <label class="form-check-label" for="gridCheck1">
+                        Example checkbox
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--提交-->
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        $('#fileUpload').on('change', function (event) {
+            var file = event.target.files[0];
+            var formData = new FormData();
+            formData.append('file', file);
+
+            $.ajax({
+                url: '/image/fix',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                xhr: function () {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', function (event) {
+                            if (event.lengthComputable) {
+                                var percentComplete = event.loaded / event.total * 100;
+                                var progress = Math.round(percentComplete);
+                                $('#uploadProgress').css('width', progress + '%').attr('aria-valuenow', progress);
+                            }
+                        }, false);
+                    }
+                    return myXhr;
+                },
+                success: function (data) {
+                    console.log("upload");
+                },
+                error: function () {
+                    alert('Error in upload');
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+{% block footer %}
+<footer class="position-relative" id="footer-main">
+    <div class="footer pt-lg-7 ">
+        <div class="container pt-4 ">
+            {% include 'base/base_footer2.html' %}
+        </div>
+    </div>
+</footer>
+{% endblock %}

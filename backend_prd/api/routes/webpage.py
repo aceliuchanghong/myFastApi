@@ -28,11 +28,15 @@ async def process_info(request: Request, input_data: InputInfo):
     if modified_text == "因为困难多壮志":
         return {"output_text": modified_text + ",不教红尘惑坚心"}
     elif is_valid_url(modified_text.strip()) and re.match(url_regex, modified_text.strip()):
-        loader = WebBaseLoader(modified_text, proxies=my_proxy)
-        docs = loader.load()
-        content = ""
-        for doc in docs:
-            content += doc.page_content.replace("\n", "").replace(" ", "")
-        return {"output_text": content}
+        try:
+            loader = WebBaseLoader(modified_text, proxies=my_proxy)
+            docs = loader.load()
+            content = ""
+            for doc in docs:
+                content += doc.page_content.replace("\n", "").replace(" ", "")
+            return {"output_text": content}
+        except Exception as e:
+            print("Error:", e)
+            return {"output_text": "网站拒绝访问\n" + e}
     else:
         return {"output_text": "不规则链接"}
