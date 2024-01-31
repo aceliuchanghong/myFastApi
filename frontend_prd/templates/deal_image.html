@@ -2,7 +2,7 @@
 
 {% block Main %}
 <div class="container">
-    <form>
+    <form id="uploadForm">
         <!-- 文件上传 -->
         <div class="form-group row">
             <label for="fileUpload" class="col-sm-2 col-form-label">File Upload</label>
@@ -18,13 +18,23 @@
                     <div class="progress-bar" role="progressbar" id="uploadProgress" style="width: 0%;"
                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
+                <div id="uploadStatus"></div>
             </div>
         </div>
-        <!--输入框-->
+        <!--输入框1-->
         <div class="form-group row">
-            <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
+            <label for="inputName3" class="col-sm-2 col-form-label">任务名称</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputName3">
+                <div id="nameError3" class="invalid-feedback"></div>
+            </div>
+        </div>
+        <!--输入框2-->
+        <div class="form-group row">
+            <label for="inputName4" class="col-sm-2 col-form-label">用户替代值</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputName4">
+                <div id="nameError4" class="invalid-feedback"></div>
             </div>
         </div>
         <!--选项1-->
@@ -78,6 +88,55 @@
             var formData = new FormData();
             formData.append('file', file);
 
+            // 清空进度条和状态
+            $('#uploadProgress').css('width', '0%').attr('aria-valuenow', 0);
+            $('#uploadProgress').empty();
+            $('#uploadStatus').empty();
+        });
+
+        $('#uploadForm').on('submit', function (event) {
+            event.preventDefault();
+
+            // 获取输入框和选项的值
+            var inputName = $('#inputName3').val();
+            var inputName4 = $('#inputName4').val();
+            var radioValue = $('input[name="gridRadios"]:checked').val();
+            var checkboxValue = $('#gridCheck1').prop('checked');
+
+            // 验证输入框和文件是否填写
+            if (!inputName) {
+                $('#inputName3').addClass('is-invalid');
+                $('#nameError3').text('Please enter a name');
+                return;
+            } else {
+                $('#inputName3').removeClass('is-invalid');
+                $('#nameError3').empty();
+            }
+            if (!inputName4) {
+                $('#inputName4').addClass('is-invalid');
+                $('#nameError4').text('Please enter');
+                return;
+            } else {
+                $('#inputName4').removeClass('is-invalid');
+                $('#nameError4').empty();
+            }
+
+            if (!$('#fileUpload').val()) {
+                $('#fileUpload').addClass('is-invalid');
+                return;
+            } else {
+                $('#fileUpload').removeClass('is-invalid');
+            }
+
+            // 构建要传递给后端的数据
+            var formData = new FormData();
+            formData.append('file', $('#fileUpload')[0].files[0]);
+            formData.append('inputName', inputName);
+            formData.append('inputName4', inputName4);
+            formData.append('radioValue', radioValue);
+            formData.append('checkboxValue', checkboxValue);
+
+            // 发送POST请求
             $.ajax({
                 url: '/image/fix',
                 type: 'POST',
@@ -85,23 +144,24 @@
                 contentType: false,
                 processData: false,
                 xhr: function () {
-                    var myXhr = $.ajaxSettings.xhr();
-                    if (myXhr.upload) {
-                        myXhr.upload.addEventListener('progress', function (event) {
-                            if (event.lengthComputable) {
-                                var percentComplete = event.loaded / event.total * 100;
-                                var progress = Math.round(percentComplete);
-                                $('#uploadProgress').css('width', progress + '%').attr('aria-valuenow', progress);
-                            }
-                        }, false);
-                    }
-                    return myXhr;
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            percentComplete = parseInt(percentComplete * 100);
+                            $('#uploadProgress').css('width', percentComplete + '%');
+                            $('#uploadProgress').attr('aria-valuenow', percentComplete);
+                            $('#uploadProgress').text(percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
                 },
                 success: function (data) {
-                    console.log("upload");
+                    $('#uploadStatus').text('Upload successful');
+                    console.log(formData);
                 },
-                error: function () {
-                    alert('Error in upload');
+                error: function (error) {
+                    $('#uploadStatus').text('Upload failed');
                     console.log(error);
                 }
             });
