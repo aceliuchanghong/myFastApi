@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sisconsavior">
     <meta name="author" content="Sisconsavior page">
-    <title>Quick{% block title %}{% endblock %}</title>
+    <title>因为困难多壮志{% block title %}{% endblock %}</title>
     <!-- Preloader -->
     <style>
         @keyframes hidePreloader {
@@ -47,6 +47,7 @@
         body.loaded > div.preloader {
             animation: hidePreloader .5s linear .5s forwards;
         }
+
     </style>
     <script>
         window.addEventListener("load", function () {
@@ -65,7 +66,7 @@
 <body>
 <!-- Preloader -->
 <div class="preloader">
-    <div class="spinner-border text-primary" role="status">
+    <div class="spinner-grow text-primary" role="status">
         <span class="sr-only">加载中...</span>
     </div>
 </div>
@@ -80,7 +81,7 @@
 {% endblock %}
 
 {% block footer %}
-{% include 'base/base_footer.html' %}
+{% include 'base/base_footer1.html' %}
 {% endblock %}
 
 <!-- Core JS  -->

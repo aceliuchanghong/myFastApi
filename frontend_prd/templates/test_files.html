@@ -1,0 +1,91 @@
+{% extends "base/base.html" %}
+
+{% block Main %}
+<div class="container">
+    <div class="form-group">
+        <input id="inputText2" name="input" type="text" class="form-control" placeholder="因为困难多壮志">
+    </div>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault2">
+        <label class="form-check-label" for="flexSwitchCheckDefault2">Proxy Open</label>
+    </div>
+    <br>
+    <button id="submitButton2" type="button" class="btn btn-primary">
+        提交
+    </button>
+    <br>
+    <div class="mb-3" id="outputDiv" style="position: relative; overflow: auto;">
+        <label for="exampleFormControlTextarea1" class="form-label"></label>
+        <textarea id="codeBlock" class="form-control"
+                  style="resize: vertical; height: 500px; white-space: pre-wrap;">
+        </textarea>
+        <br>
+        <button id="copyButton" class="btn btn-secondary btn-sm">Copy</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        // 定义提交逻辑为一个函数
+        function submitAction() {
+            var inputText = $("#inputText2").val();
+            if (inputText === "") {
+                inputText = $("#inputText2").attr("placeholder");
+            }
+            var checkboxState = $("#flexSwitchCheckDefault2").is(":checked");
+
+            $.ajax({
+                type: 'POST',
+                url: '/webpage/info',
+                data: JSON.stringify({inputText: inputText, checkboxState: checkboxState}),
+                contentType: 'application/json',
+                success: function (response) {
+                    $("#codeBlock").text(response.output_text); // Update this line
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(this.data);
+                    console.log(error);
+                }
+            });
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function () {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function (err) {
+                console.error('Async: Could not copy text: ', err);
+            });
+        }
+
+        $("#copyButton").click(function () {
+            var textToCopy = $("#codeBlock").text();
+            copyToClipboard(textToCopy);
+        });
+
+
+        // 绑定点击按钮事件
+        $("#submitButton2").click(submitAction);
+        // 绑定输入框的键盘按下事件
+        $("#inputText2").keypress(function (event) {
+            // 检查按下的键是否是Enter键（键码13）
+            if (event.which == 13) {
+                event.preventDefault(); // 阻止默认行为
+                submitAction(); // 执行提交逻辑
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% block footer %}
+<footer class="position-relative" id="footer-main">
+    <div class="footer pt-lg-7 ">
+        <div class="container pt-4 ">
+            {% include 'base/base_footer2.html' %}
+        </div>
+    </div>
+</footer>
+{% endblock %}
