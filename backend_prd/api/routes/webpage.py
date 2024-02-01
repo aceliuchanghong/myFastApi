@@ -38,6 +38,6 @@ async def process_info(request: Request, input_data: InputInfo):
             return {"output_text": content}
         except Exception as e:
             print("Error:", e)
-            return {"output_text": "网站拒绝访问\n" + e}
+            return {"output_text": "网站拒绝访问,可以尝试使用代理\n" + str(e)}
     else:
         return {"output_text": "不规则链接"}
