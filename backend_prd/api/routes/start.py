@@ -45,4 +45,4 @@ def get_task_info(request: Request):
 
 @router.get("/Docs")
 def get_docs_list(request: Request):
-    return templates.TemplateResponse("docs/index.html", {"request": request})
+    return templates.TemplateResponse("docs.html", {"request": request})
