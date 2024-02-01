@@ -1,50 +1,44 @@
 {% extends "base/base.html" %}
-
 {% block Main %}
 <div class="container">
-    <!-- Sidenav -->
-    <nav class="sidenav navbar navbar-vertical navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-        <div class="scrollbar-inner px-4">
-            <!-- Navigation -->
-            <div class="docs-sidebar pt-6 pt-lg-7">
-                <h6 class="mt-4">Getting started</h6>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="../../docs/getting-started/quick-start.html" class="nav-link">Quick start</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../../docs/getting-started/build-tools.html" class="nav-link">Build tools</a>
-                    </li>
-                </ul>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                {% for file in files %}
+                <a class="nav-link" id="{{ file.id }}-tab" data-toggle="pill" href="#{{ file.id }}" role="tab"
+                   aria-controls="{{ file.id }}" aria-selected="true">{{ file.name }}</a>
+                {% endfor %}
             </div>
         </div>
-    </nav>
-    <div class="docs-title">
-        <h1>Modal</h1>
-        <p class="lead mb-0">Use this modal plugin to add dialogs to your site for lightboxes, user notifications, or
-            completely custom content.</p>
-        <div class="mt-4">
-            <a href="http://getbootstrap.com/docs/4.4/components/modal" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="feather feather-external-link mr-2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                Bootstrap Documentation
-            </a>
+        <div class="col-md-9">
+            <div class="docs-title">
+                <h1>Modal</h1>
+                <p class="lead mb-0">Use this modal plugin to add dialogs to your site for lightboxes, user
+                    notifications, or
+                    completely custom content.</p>
+                <div class="mt-4">
+                    <a href="/Pages/Task" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-external-link mr-2">
+                            <path
+                                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        查看任务进度
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
+
 {% block footer %}
 <footer class="position-relative" id="footer-main">
     <div class="footer pt-lg-7">
-        <div class="container pt-4">
-            {% include 'base/base_footer2.html' %}
-        </div>
+        <div class="container pt-4"> {% include 'base/base_footer2.html' %}</div>
     </div>
 </footer>
 {% endblock %}

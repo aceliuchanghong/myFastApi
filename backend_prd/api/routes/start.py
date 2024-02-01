@@ -1,7 +1,9 @@
 from fastapi import Request
+from starlette.responses import HTMLResponse
+
 from config import templates
 from fastapi import APIRouter, BackgroundTasks
-
+import os
 from test.test_bg_task import write_log
 
 router = APIRouter()
@@ -43,6 +45,14 @@ def get_task_info(request: Request):
     return templates.TemplateResponse("task_info.html", {"request": request})
 
 
-@router.get("/Docs")
+@router.get("/Docs", response_class=HTMLResponse)
 def get_docs_list(request: Request):
-    return templates.TemplateResponse("docs.html", {"request": request})
+    files = []
+    for filename in os.listdir('frontend_prd/templates/docs'):
+        if filename.endswith('.md'):
+            file_id = os.path.splitext(filename)[0]
+            file_name = file_id.replace('_', ' ').title()
+            files.append({'id': file_id, 'name': file_name})
+    for i in files:
+        print(i)
+    return templates.TemplateResponse("docs.html", {"request": request, "files": files})
