@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 from langchain_community.document_loaders import WebBaseLoader
 import re
-from backend_prd.api.models.others import InputInfo
 from fastapi import Request
+
+from backend_prd.api.models.webpage import InputInfo
 from config import proxies
 from utils.url_valid import is_valid_url, url_regex
 

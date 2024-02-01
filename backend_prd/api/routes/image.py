@@ -41,10 +41,12 @@ async def process_info(request: Request, file: UploadFile = File(...), input_tas
     directory = f"testfiles/{input_user_name}/{input_task_name}"
     # 确保目录存在
     validate_output_path(directory)
+    basename, extension = os.path.splitext(file.filename)
     # 拼接完整的文件路径
     file_location = os.path.join(directory, file.filename)
 
     print(radio_value, checkbox_value)
+    print(basename, extension)
     with open(file_location, "wb+") as file_object:
         file_content = await file.read()  # 使用await来异步读取文件
         file_object.write(file_content)
