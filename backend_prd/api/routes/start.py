@@ -1,18 +1,21 @@
 from fastapi import Request
 from config import templates
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
+
+from test.test_bg_task import write_log
 
 router = APIRouter()
 
 
 @router.get("/Pages/About")
-def get_page_about():
-    return {"message": "Get image list"}
+def get_page_about(request: Request, background_tasks: BackgroundTasks):
+    background_tasks.add_task(write_log, message='liu')
+    return templates.TemplateResponse("about.html", {"request": request})
 
 
-@router.get("/Pages/Contact")
-def get_page_contact():
-    return {"message": "Get image list"}
+@router.get("/Pages/Faq")
+def get_page_contact(request: Request):
+    return templates.TemplateResponse("faq.html", {"request": request})
 
 
 @router.get("/Pages/Crawl")
