@@ -58,9 +58,9 @@
     </script>
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', path='/images/avatar3.png') }}" type="image/png"><!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/assets/libs/@fortawesome/fontawesome-free/css/all.min.css') }}">
     <!-- Quick CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/quick-website.css') }}" id="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='/assets/css/quick-website.css') }}" id="stylesheet">
 </head>
 
 <body>
@@ -85,14 +85,12 @@
 {% endblock %}
 
 <!-- Core JS  -->
-<script src="{{ url_for('static', path='/js/jquery-3.7.1.min.js') }}"></script>
-<script src="{{ url_for('static', path='/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ url_for('static', path='/js/svg-injector.min.js') }}"></script>
-<script src="{{ url_for('static', path='/js/feather.min.js') }}"></script>
+<script src="{{ url_for('static', path='/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', path='/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', path='/assets/libs/svg-injector/dist/svg-injector.min.js') }}"></script>
+<script src="{{ url_for('static', path='/assets/libs/feather-icons/dist/feather.min.js') }}"></script>
 <!-- Quick JS -->
-<script src="{{ url_for('static', path='/js/quick-website.js') }}"></script>
-<script src="{{ url_for('static', path='/js/clipboard.min.js') }}"></script>
-<script src="{{ url_for('static', path='/js/highlight.min.js') }}"></script>
+<script src="{{ url_for('static', path='/assets/js/quick-website.js') }}"></script>
 
 <!-- Feather Icons -->
 {% block css %}

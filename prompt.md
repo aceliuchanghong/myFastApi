@@ -1,7 +1,7 @@
 初始化:
 使用的后端是fastapi,前端bootstrap+jinja2,已经引入了
 ```
-<script src="{{ url_for('static', path='/others_js/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ url_for('static', path='/others_js/jquery.min.js') }}"></script>
 <!-- Popper.JS -->
 <script src="{{ url_for('static', path='/others_js/popper.min.js') }}"></script>
 <!-- Bootstrap JS -->
