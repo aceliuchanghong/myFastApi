@@ -5,7 +5,7 @@
         <div class="col-md-3">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 {% for file in files %}
-                <a class="nav-link" id="{{ file.id }}-tab" data-toggle="pill" href="#{{ file.id }}" role="tab"
+                <a class="nav-link" id="{{ file.id }}-tab" data-toggle="pill" href="/Docs/{{ file.id }}" role="tab"
                    aria-controls="{{ file.id }}" aria-selected="true">{{ file.name }}</a>
                 {% endfor %}
             </div>

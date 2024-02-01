@@ -5,7 +5,7 @@ import re
 
 
 def openfile(filename):
-    filepath = os.path.join("backend/pages/", filename)
+    filepath = os.path.join("frontend_prd/templates/docs/", filename)
     if not os.path.exists(filepath):
         data = {
             "text": f"no {filename}.md file"
