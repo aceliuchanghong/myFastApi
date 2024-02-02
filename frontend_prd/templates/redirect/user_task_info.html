@@ -38,18 +38,21 @@
                             <div class="card" style="width: 18rem;">
                                 <img src="{{ url_for('static', path='/images/svg/inspiration.svg') }}"
                                      class="card-img-top"
-                                     alt="...">
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ task.task_status }}:{{ task.task_name }}</h4>
-                                    <p class="card-text">
+                                     alt="..."
+                                     style="height: 100px; object-fit: cover;"> <!-- 调整图片高度和对象填充方式 -->
+                                <div class="card-body" style="padding: 10px;"> <!-- 减少内部填充 -->
+                                    <h4 class="card-title"
+                                        style="font-size: 1rem;">{{ task.task_status }}:{{ task.task_name }}</h4>
+                                    <!-- 调整标题字体大小 -->
+                                    <p class="card-text" style="font-size: 0.8rem;"> <!-- 调整正文字体大小 -->
                                         任务ID: {{ task.task_id }}<br>
                                         任务状态: {{ task.task_status }}<br>
                                         开始时间: {{ task.start_time }}<br>
                                         最后修改时间: {{ task.last_modify_time }}<br>
                                         备注: {{ task.remark }}
                                     </p>
-                                    <a href="#" class="btn btn-primary">重跑</a>
-                                    <a href="#" class="btn btn-primary">删除</a>
+                                    <a href="#" class="btn btn-primary btn-sm">重跑</a>
+                                    <a href="#" class="btn btn-primary btn-sm">删除</a>
                                 </div>
                             </div>
                         </div>
