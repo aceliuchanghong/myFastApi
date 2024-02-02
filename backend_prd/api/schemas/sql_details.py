@@ -25,3 +25,13 @@ create_table_queries = [
     );
     """
 ]
+
+task_list_query = """
+        SELECT
+            task_type,
+            SUM(CASE WHEN task_status = 'SUC' THEN 1 ELSE 0 END) AS success_count,
+            SUM(CASE WHEN task_status = 'RUN' THEN 1 ELSE 0 END) AS in_progress_count,
+            SUM(CASE WHEN task_status = 'ERR' THEN 1 ELSE 0 END) AS failure_count
+        FROM task_info
+        GROUP BY task_type
+    """

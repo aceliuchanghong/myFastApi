@@ -53,7 +53,7 @@ async def process_info(request: Request, file: UploadFile = File(...), input_tas
         file_content = await file.read()  # 使用await来异步读取文件
         file_object.write(file_content)
     execute_sqlite_sql(task_insert_sql, params=(
-        input_user_name, 'image', input_task_name, input_task_name, 'SUC', '0', 'last_modify_time', 'remark'),
+        input_user_name, 'image', input_task_name, input_task_name, 'RUN', '0', 'last_modify_time', 'remark'),
                        should_log=True)
 
     print({"message": "Upload successful"})

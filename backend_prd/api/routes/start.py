@@ -1,6 +1,8 @@
 from fastapi import Request
 from starlette.responses import HTMLResponse
 
+from backend_prd.api.schemas import task_list_query
+from backend_prd.core.database import execute_sqlite_sql
 from config import templates
 from fastapi import APIRouter, BackgroundTasks
 import os
@@ -43,7 +45,25 @@ def get_audio_deal(request: Request):
 
 @router.get("/Pages/Task")
 def get_task_info(request: Request):
-    return templates.TemplateResponse("task_info.html", {"request": request})
+    rows = execute_sqlite_sql(task_list_query, should_log=True)
+    task_info = []
+    if rows:
+        for row in rows:
+            print(row)
+            task_type, success_count, in_progress_count, failure_count = row
+            task_info.append({
+                "task_type": task_type,
+                "success_count": success_count,
+                "in_progress_count": in_progress_count,
+                "failure_count": failure_count
+            })
+    return templates.TemplateResponse("task_info.html", {"request": request, "task_info": task_info})
+
+
+@router.get("/Pages/Task/{user_id}", response_class=HTMLResponse)
+def get_task_info(request: Request, user_id: str):
+    redirect_url = "redirect/user_task_info.html"
+    return templates.TemplateResponse(redirect_url, {"request": request, "user_id": user_id})
 
 
 @router.get("/Docs", response_class=HTMLResponse)
