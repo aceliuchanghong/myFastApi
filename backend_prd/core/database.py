@@ -4,11 +4,10 @@ from backend_prd.api.schemas import create_table_queries
 import config
 from backend_prd.api.models.others import SQLiteConnectionPool
 
-db_pool = SQLiteConnectionPool(config.db_info)
-
 
 @contextmanager
 def get_db():
+    db_pool = SQLiteConnectionPool(config.db_info)
     # database
     conn = db_pool.get_connection()
     try:
@@ -61,7 +60,3 @@ def execute_sqlite_sql(sql, params=None, should_print=False, fetch_size=None, sh
 def create_tables():
     for query in create_table_queries:
         execute_sqlite_sql(query)
-
-
-def close_db_connection():
-    db_pool.close_all_connections()

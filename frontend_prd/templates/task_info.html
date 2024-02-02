@@ -13,8 +13,8 @@
         <button id="submitButton2" type="button" class="btn btn-primary">
             submit
         </button>
-        <!--提任务表格-->
         <br><br><br><br>
+        <!--任务表格-->
         <table class="table">
             <thead>
             <tr>
@@ -27,7 +27,7 @@
             <tbody>
             {% for task in task_info %}
                 <tr>
-                    <th scope="row">{{ loop.index }}</th>
+                    <th scope="row">{{ task.task_type }}</th>
                     <td>{{ task.success_count }}</td>
                     <td>{{ task.in_progress_count }}</td>
                     <td>{{ task.failure_count }}</td>

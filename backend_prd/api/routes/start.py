@@ -1,6 +1,6 @@
-from fastapi import Request
+from fastapi import Request, Form, Depends
 from starlette.responses import HTMLResponse
-
+from fastapi.security import HTTPBasicCredentials
 from backend_prd.api.schemas import task_list_query
 from backend_prd.core.database import execute_sqlite_sql
 from config import templates
@@ -49,7 +49,6 @@ def get_task_info(request: Request):
     task_info = []
     if rows:
         for row in rows:
-            print(row)
             task_type, success_count, in_progress_count, failure_count = row
             task_info.append({
                 "task_type": task_type,
@@ -88,3 +87,15 @@ def get_doc(request: Request, md_file_name: str):
 
     data = openfile(md_file_name + ".md")
     return templates.TemplateResponse("docs/docs_details.html", {"request": request, "files": files, "data": data})
+
+
+@router.post("/register")
+def register(username: str = Form(...), password: str = Form(...)):
+    # Your registration logic here
+    return {"message": "User registered successfully"}
+
+
+@router.post("/login")
+def login(request: Request):
+    # Your login logic here
+    return {"message": "Login successful"}
