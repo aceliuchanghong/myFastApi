@@ -55,8 +55,7 @@ user_task_detail_query = """
         task_status,
         start_time,
         last_modify_time,
-        remark,
+        remark
         FROM task_info where user_id = ? and task_type = ? 
-        GROUP BY task_type
-        order by last_modify_time desc
+        order by last_modify_time desc,task_name desc
     """

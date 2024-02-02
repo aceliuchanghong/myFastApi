@@ -6,12 +6,12 @@
         <!--输入框-->
         <div class="form-group2">
             <input id="inputText2" name="input" type="text" class="form-control border-2"
-                   placeholder="此处输入用户名,前往对应用户下所有任务">
+                   placeholder="此处输入用户名,前往查看该用户下所有任务">
         </div>
         <br>
         <!--提交按钮-->
         <button id="submitButton2" type="button" class="btn btn-primary">
-            submit
+            查看
         </button>
         <br><br><br><br>
         <!--任务表格-->
@@ -35,6 +35,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <br><br>
+        <!--填充-->
+        {% include "base/base_fill1.html" %}
     </div>
 {% endblock %}
 
@@ -53,4 +56,11 @@
 {% endblock %}
 
 {% block footer %}
+    <footer class="position-relative" id="footer-main">
+        <div class="footer pt-lg-7 ">
+            <div class="container pt-4 ">
+                {% include 'base/base_footer2.html' %}
+            </div>
+        </div>
+    </footer>
 {% endblock %}

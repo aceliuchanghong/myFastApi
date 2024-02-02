@@ -26,43 +26,36 @@
         </table>
         <br><br>
         <!--任务类别1-->
-        <div class="card" style="width: 18rem;">
-            <img src="{{ url_for('static', path='/assets/img/clients/160x160/img-5.png') }}" class="card-img-top"
-                 alt="..." style="width: 100px; height: auto;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-                <a href="#" class="btn btn-primary">重跑</a>
-                <a href="#" class="btn btn-primary">删除</a>
-            </div>
-        </div>
-        <!--任务类别2-->
-        <div class="card" style="width: 18rem;">
-            <img src="{{ url_for('static', path='/assets/img/clients/160x160/img-4.png') }}" class="card-img-top"
-                 alt="..." style="width: 100px; height: auto;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-                <a href="#" class="btn btn-primary">重跑</a>
-                <a href="#" class="btn btn-primary">删除</a>
-            </div>
-        </div>
-        <!--任务类别3-->
-        <div class="card" style="width: 18rem;">
-            <img src="{{ url_for('static', path='/assets/img/clients/160x160/img-1.png') }}" class="card-img-top"
-                 alt="..." style="width: 100px; height: auto;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-                <a href="#" class="btn btn-primary">重跑</a>
-                <a href="#" class="btn btn-primary">删除</a>
-            </div>
+        <div class="dropdown-divider"></div>
+        <div class="row mt-5">
+            {% for task_type in task_info %}
+                <div class="col-12">
+                    <h2 class="text">{{ task_type.task_type }}任务</h2>
+                </div>
+                {% for task in tasks_info %}
+                    {% if task.task_type == task_type.task_type %}
+                        <div class="col-md-4">
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ url_for('static', path='/images/svg/inspiration.svg') }}"
+                                     class="card-img-top"
+                                     alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ task.task_status }}:{{ task.task_name }}</h4>
+                                    <p class="card-text">
+                                        任务ID: {{ task.task_id }}<br>
+                                        任务状态: {{ task.task_status }}<br>
+                                        开始时间: {{ task.start_time }}<br>
+                                        最后修改时间: {{ task.last_modify_time }}<br>
+                                        备注: {{ task.remark }}
+                                    </p>
+                                    <a href="#" class="btn btn-primary">重跑</a>
+                                    <a href="#" class="btn btn-primary">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

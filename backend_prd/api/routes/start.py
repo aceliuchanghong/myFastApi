@@ -1,7 +1,6 @@
-from fastapi import Request, Form, Depends
+from fastapi import Request, Form
 from starlette.responses import HTMLResponse
-from fastapi.security import HTTPBasicCredentials
-from backend_prd.api.schemas import task_list_query, user_task_list_query
+from backend_prd.api.schemas import *
 from backend_prd.core.database import execute_sqlite_sql
 from config import templates
 from fastapi import APIRouter, BackgroundTasks
@@ -61,6 +60,8 @@ def get_task_info(request: Request):
 
 @router.get("/Pages/Task/{user_id}", response_class=HTMLResponse)
 def get_task_info(request: Request, user_id: str):
+    redirect_url = "redirect/user_task_info.html"
+
     results = execute_sqlite_sql(user_task_list_query, params=(user_id,), should_log=True)
     task_info = []
     if results:
@@ -72,8 +73,18 @@ def get_task_info(request: Request, user_id: str):
                 "in_progress_count": in_progress_count,
                 "failure_count": failure_count
             })
-    redirect_url = "redirect/user_task_info.html"
-    return templates.TemplateResponse(redirect_url, {"request": request, "task_info": task_info})
+
+    tasks_info = []
+    for task_type in task_info:
+        task_type_info = execute_sqlite_sql(user_task_detail_query, params=(user_id, task_type["task_type"]),
+                                            should_log=True)
+        if task_type_info:
+            task_type_info = [dict(zip(["user_id", "task_type", "task_id", "task_name", "task_status", "start_time",
+                                        "last_modify_time", "remark"], task)) for task in task_type_info]
+            tasks_info.extend(task_type_info)
+
+    return templates.TemplateResponse(redirect_url,
+                                      {"request": request, "task_info": task_info, "tasks_info": tasks_info})
 
 
 @router.get("/Docs", response_class=HTMLResponse)
