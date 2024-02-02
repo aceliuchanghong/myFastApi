@@ -1,17 +1,81 @@
 {% extends "base/base.html" %}
 
 {% block Main %}
+    <div class="container">
+        <br><br>
+        <!--任务表格-->
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">任务类型</th>
+                <th scope="col">成功</th>
+                <th scope="col">进行中</th>
+                <th scope="col">失败</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in task_info %}
+                <tr>
+                    <th scope="row">{{ task.task_type }}</th>
+                    <td>{{ task.success_count }}</td>
+                    <td>{{ task.in_progress_count }}</td>
+                    <td>{{ task.failure_count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br>
+        <!--任务类别1-->
+        <div class="card" style="width: 18rem;">
+            <img src="{{ url_for('static', path='/assets/img/clients/160x160/img-5.png') }}" class="card-img-top"
+                 alt="..." style="width: 100px; height: auto;">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+                <a href="#" class="btn btn-primary">重跑</a>
+                <a href="#" class="btn btn-primary">删除</a>
+            </div>
+        </div>
+        <!--任务类别2-->
+        <div class="card" style="width: 18rem;">
+            <img src="{{ url_for('static', path='/assets/img/clients/160x160/img-4.png') }}" class="card-img-top"
+                 alt="..." style="width: 100px; height: auto;">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+                <a href="#" class="btn btn-primary">重跑</a>
+                <a href="#" class="btn btn-primary">删除</a>
+            </div>
+        </div>
+        <!--任务类别3-->
+        <div class="card" style="width: 18rem;">
+            <img src="{{ url_for('static', path='/assets/img/clients/160x160/img-1.png') }}" class="card-img-top"
+                 alt="..." style="width: 100px; height: auto;">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+                <a href="#" class="btn btn-primary">重跑</a>
+                <a href="#" class="btn btn-primary">删除</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block script %}
 {% endblock %}
 
 {% block footer %}
-<footer class="position-relative" id="footer-main">
-    <div class="footer pt-lg-7 ">
-        <div class="container pt-4 ">
-            {% include 'base/base_footer2.html' %}
+    <footer class="position-relative" id="footer-main">
+        <div class="footer pt-lg-7 ">
+            <div class="container pt-4 ">
+                {% include 'base/base_footer2.html' %}
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 {% endblock %}

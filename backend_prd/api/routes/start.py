@@ -1,7 +1,7 @@
 from fastapi import Request, Form, Depends
 from starlette.responses import HTMLResponse
 from fastapi.security import HTTPBasicCredentials
-from backend_prd.api.schemas import task_list_query
+from backend_prd.api.schemas import task_list_query, user_task_list_query
 from backend_prd.core.database import execute_sqlite_sql
 from config import templates
 from fastapi import APIRouter, BackgroundTasks
@@ -61,8 +61,19 @@ def get_task_info(request: Request):
 
 @router.get("/Pages/Task/{user_id}", response_class=HTMLResponse)
 def get_task_info(request: Request, user_id: str):
+    results = execute_sqlite_sql(user_task_list_query, params=(user_id,), should_log=True)
+    task_info = []
+    if results:
+        for result in results:
+            task_type, success_count, in_progress_count, failure_count = result
+            task_info.append({
+                "task_type": task_type,
+                "success_count": success_count,
+                "in_progress_count": in_progress_count,
+                "failure_count": failure_count
+            })
     redirect_url = "redirect/user_task_info.html"
-    return templates.TemplateResponse(redirect_url, {"request": request, "user_id": user_id})
+    return templates.TemplateResponse(redirect_url, {"request": request, "task_info": task_info})
 
 
 @router.get("/Docs", response_class=HTMLResponse)
