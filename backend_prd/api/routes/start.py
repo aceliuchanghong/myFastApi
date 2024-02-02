@@ -117,7 +117,7 @@ def register(username: str = Form(...), password: str = Form(...)):
     return {"message": "User registered successfully"}
 
 
-@router.post("/login")
+@router.get("/login", response_class=HTMLResponse)
 def login(request: Request):
-    # Your login logic here
-    return {"message": "Login successful"}
+    data = openfile("login" + ".md")
+    return templates.TemplateResponse("login.html", {"request": request, "data": data})

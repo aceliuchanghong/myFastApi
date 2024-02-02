@@ -1,128 +1,134 @@
 {% extends "base/base.html" %}
 
 {% block Main %}
-<div class="container">
-    <div class="card bg-section-dark border-0 rounded-lg" style="max-width: 100%;">
-        <div class="card-body px-5">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center align-items-center mb-3">
-                        <div>
-                            <div class="icon icon-sm icon-shape bg-warning text-white rounded-circle mr-3">
-                                <i data-feather="airplay"></i>
+    <div class="container">
+        <div class="card bg-section-dark border-0 rounded-lg" style="max-width: 100%;">
+            <div class="card-body px-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center align-items-center mb-3">
+                            <div>
+                                <div class="icon icon-sm icon-shape bg-warning text-white rounded-circle mr-3">
+                                    <i data-feather="airplay"></i>
+                                </div>
                             </div>
+                            <span class="h6 text-white mb-0">快速了解</span>
                         </div>
-                        <span class="h6 text-white mb-0">Quick</span>
+                        <h5 class="text-white pt-4">上海九州为科技有限公司</h5>
+                        <p class="text-white opacity-8">
+                            上海九州为科技有限公司，位于中国科技创新的前沿——上海，是一家专注于人工智能和深度学习技术的高新技术企业。
+                            我们致力于打造一流的智能化服务，包括语音克隆、网站爬取、视频转码、音频转文字以及文字转音频等多项技术服务，
+                            旨在为企业和个人提供全面、高效、定制化的智能解决方案。
+                        </p>
                     </div>
-                    <h5 class="text-white pt-4">Infinite solutions with only one template.</h5>
-                    <p class="text-white opacity-8">
-                        With an intuitive markup, powerful and lightning fast build tools, Quick has everything you need
-                        to
-                        turn your ideas into incredible products.
-                    </p>
-                </div>
-                <div class="col-12 col-md-6 mt-4 mt-md-0 pr-4 pb-3 d-flex align-items-end justify-content-md-end">
-                    <a href="#" class="btn btn-white btn-icon">
-                        <span class="btn-inner--text">Learn more</span>
-                        <span class="btn-inner--icon">
+                    <div class="col-12 col-md-6 mt-4 mt-md-0 pr-4 pb-3 d-flex align-items-end justify-content-md-end">
+                        <a href="/Docs/home" class="btn btn-white btn-icon">
+                            <span class="btn-inner--text">了解更多</span>
+                            <span class="btn-inner--icon">
                         <i data-feather="arrow-right" class="text-warning"></i>
                     </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card hover-translate-y-n10 hover-shadow-lg">
-        <div class="card-body">
-            <div class="pb-4">
-                <div class="icon bg-dark text-white rounded-circle icon-shape shadow">
-                    <i data-feather="droplet"></i>
+        <div class="card hover-translate-y-n10 hover-shadow-lg">
+            <div class="card-body">
+                <div class="pb-4">
+                    <div class="icon bg-dark text-white rounded-circle icon-shape shadow">
+                        <i data-feather="droplet"></i>
+                    </div>
+                </div>
+                <div class="pt-2 pb-3">
+                    <h5><a href="/Pages/Image" style="text-decoration: none; color: inherit;">语音克隆技术</a></h5>
+                    <p class="text-muted mb-0">
+                        我们的语音克隆技术能够精准复制特定人声，为广播、配音和虚拟助手等领域提供高度逼真的声音输出。
+                    </p>
                 </div>
             </div>
-            <div class="pt-2 pb-3">
-                <h5>Modular</h5>
-                <p class="text-muted mb-0">
-                    All components are built to be used in any combination.
-                </p>
-            </div>
         </div>
-    </div>
-    <div class="card hover-translate-y-n10 hover-shadow-lg">
-        <div class="card-body">
-            <div class="pb-4">
-                <div class="icon bg-dark text-white rounded-circle icon-shape shadow">
-                    <i data-feather="droplet"></i>
+        <div class="card hover-translate-y-n10 hover-shadow-lg">
+            <div class="card-body">
+                <div class="pb-4">
+                    <div class="icon bg-dark text-white rounded-circle icon-shape shadow">
+                        <i data-feather="droplet"></i>
+                    </div>
+                </div>
+                <div class="pt-2 pb-3">
+                    <h5><a href="/Pages/Audio" style="text-decoration: none; color: inherit;">音频转文字及文字转音频服务</a></h5>
+                    <p class="text-muted mb-0">
+                        音频转文字及文字转音频服务则极大地提高了内容的可访问性和互动
+                    </p>
                 </div>
             </div>
-            <div class="pt-2 pb-3">
-                <h5>Modular</h5>
-                <p class="text-muted mb-0">
-                    All components are built to be used in any combination.
-                </p>
-            </div>
         </div>
-    </div>
 
-    <div class="card hover-translate-y-n10 hover-shadow-lg">
-        <div class="card-body">
-            <div class="pb-4">
-                <div class="icon bg-dark text-white rounded-circle icon-shape shadow">
-                    <i data-feather="droplet"></i>
+        <div class="card hover-translate-y-n10 hover-shadow-lg">
+            <div class="card-body">
+                <div class="pb-4">
+                    <div class="icon bg-dark text-white rounded-circle icon-shape shadow">
+                        <i data-feather="droplet"></i>
+                    </div>
+                </div>
+                <div class="pt-2 pb-3">
+                    <h5><a href="/Pages/Video" style="text-decoration: none; color: inherit;">视频转码服务</a></h5>
+                    <p class="text-muted mb-0">
+                        视频转码服务保证了视频内容在不同平台和设备上的无缝播放
+                    </p>
                 </div>
             </div>
-            <div class="pt-2 pb-3">
-                <h5>Modular</h5>
-                <p class="text-muted mb-0">
-                    All components are built to be used in any combination.
-                </p>
+        </div>
+
+        <div class="card hover-translate-y-n10 hover-shadow-lg">
+            <div class="card-body">
+                <div class="pb-4">
+                    <div class="icon bg-dark text-white rounded-circle icon-shape shadow">
+                        <i data-feather="droplet"></i>
+                    </div>
+                </div>
+                <div class="pt-2 pb-3">
+                    <h5><a href="/Pages/Crawl" style="text-decoration: none; color: inherit;">网站爬取服务</a></h5>
+                    <p class="text-muted mb-0">
+                        能高效获取和处理网络数据，支持企业的市场研究、竞争分析等需求
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress" role="progressbar" aria-label="Success example 1px high" aria-valuenow="25"
+             aria-valuemin="0"
+             aria-valuemax="100" style="height: 30px">
+            <div class="progress-bar bg-success" style="width: 25%">今年工作进度25%</div>
+        </div>
+        <br>
+        <div class="progress" role="progressbar" aria-label="Info example 10px high" aria-valuenow="50"
+             aria-valuemin="0"
+             aria-valuemax="100" style="height: 30px">
+            <div class="progress-bar bg-info text-dark" style="width: 50%">日常专注程度50%</div>
+        </div>
+        <br>
+        <div class="progress" role="progressbar" aria-label="Warning example 10px high" aria-valuenow="75"
+             aria-valuemin="0"
+             aria-valuemax="100" style="height: 30px">
+            <div class="progress-bar bg-warning text-dark" style="width: 75%">目标完成进度75%</div>
+        </div>
+        <br>
+        <div class="progress" role="progressbar" aria-label="Danger example 20px high" aria-valuenow="100"
+             aria-valuemin="0"
+             aria-valuemax="100" style="height: 30px">
+            <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width: 80%">
+                修改进度80%
             </div>
         </div>
     </div>
-
-    <div class="card hover-translate-y-n10 hover-shadow-lg">
-        <div class="card-body">
-            <div class="pb-4">
-                <div class="icon bg-dark text-white rounded-circle icon-shape shadow">
-                    <i data-feather="droplet"></i>
-                </div>
-            </div>
-            <div class="pt-2 pb-3">
-                <h5>Modular</h5>
-                <p class="text-muted mb-0">
-                    All components are built to be used in any combination.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="progress" role="progressbar" aria-label="Success example 1px high" aria-valuenow="25" aria-valuemin="0"
-         aria-valuemax="100" style="height: 30px">
-        <div class="progress-bar bg-success" style="width: 25%">今年工作进度25%</div>
-    </div>
-    <br>
-    <div class="progress" role="progressbar" aria-label="Info example 10px high" aria-valuenow="50" aria-valuemin="0"
-         aria-valuemax="100" style="height: 30px">
-        <div class="progress-bar bg-info text-dark" style="width: 50%">日常专注程度50%</div>
-    </div>
-    <br>
-    <div class="progress" role="progressbar" aria-label="Warning example 10px high" aria-valuenow="75" aria-valuemin="0"
-         aria-valuemax="100" style="height: 30px">
-        <div class="progress-bar bg-warning text-dark" style="width: 75%">目标完成进度75%</div>
-    </div>
-    <br>
-    <div class="progress" role="progressbar" aria-label="Danger example 20px high" aria-valuenow="100" aria-valuemin="0"
-         aria-valuemax="100" style="height: 30px">
-        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width: 80%">修改进度80%</div>
-    </div>
-</div>
 {% endblock %}
 
 {% block footer %}
-<footer class="position-relative" id="footer-main">
-    <div class="footer pt-lg-7 ">
-        <div class="container pt-4 ">
-            {% include 'base/base_footer2.html' %}
+    <footer class="position-relative" id="footer-main">
+        <div class="footer pt-lg-7 ">
+            <div class="container pt-4 ">
+                {% include 'base/base_footer2.html' %}
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 {% endblock %}

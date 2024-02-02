@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/base.html" %}
+{% block Main %}
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col">
+                    <br>
+                    {{ data.text|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-</body>
-</html>
+{% block footer %}
+    <footer class="position-relative" id="footer-main">
+        <div class="footer pt-lg-7 ">
+            <div class="container pt-4 ">
+                {% include 'base/base_footer2.html' %}
+            </div>
+        </div>
+    </footer>
+{% endblock %}

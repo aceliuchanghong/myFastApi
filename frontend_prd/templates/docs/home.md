@@ -9,9 +9,8 @@
 
 ---
 
-开启了解世界: [**Home Page**](https://github.com/aceliuchanghong)
+开启了解: [**Home Page**](https://github.com)
 
-项目地址: [**Github**](https://github.com/aceliuchanghong/myFastApi)
 
 ---
 
