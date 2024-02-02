@@ -3,6 +3,13 @@ from sqlite3 import Error
 
 from config import logger
 
+from pydantic import BaseModel
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
 
 # 数据库模型
 class SQLiteConnectionPool:
