@@ -11,11 +11,8 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # 再复制其余的源文件，这些源文件因为是业务逻辑，所以变动的可能性很大，放在最上面构建，而不是放在最开头构建，能够有效地避免这一部分带来的变化，从而利用缓存，节省构建时间。
-COPY ./myFastApi /code/myFastApi
+COPY * /code/myFastApi
 
 # 容器启动命令
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "myFastApi.main:app", "--host", "0.0.0.0", "--port", "80"]
 
-# 之后执行的
-# docker build -t myimage .
-# docker run -d --name myFastApi20240204V1 -p 80:80 myimage

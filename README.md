@@ -30,7 +30,18 @@ sudo apt update && sudo apt upgrade
 sudo apt install ffmpeg
 ffmpeg -version
 ```
+
+### docker install
+
+```
+# 之后执行的
+clone 之后 cd myFastApi之后
+docker build -t myimage .
+docker run -d --name myFastApi20240204V1 -p 80:80 myFastApi20240204V1
+```
+
 ### project
+
 ```stucture
 myFastApi/
 |
