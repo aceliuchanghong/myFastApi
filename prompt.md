@@ -48,3 +48,47 @@ myFastApi/
     ├── path_valid.py
     └── url_valid.py
 ```
+任务模板
+```https://jszoo.com/detail/32#heading-5
+name: Docker Image CI/CD # workflow名称，可以随意改
+on: # workflow的事件钩子，告知程序说明时候出发自动部署
+  push:
+    branches: [ master ] # 在master分支有push操作的时候自动部署
+jobs:
+  build: # 打包并上传docker镜像
+    runs-on: ubuntu-latest # 依赖的环境      
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Image
+      # ${{ secrets.DOCKER_REPOSITORY }}是读取之前在Secret创建的名为DOCKER_REPOSITORY的值
+        run: docker build -t ${{ secrets.DOCKER_REPOSITORY }}:latest ./ # 打包并docker镜像，版本为latest
+      - name: Login to Registry # 登录阿里云镜像服务器
+        run: docker login --username=${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+      - name: Push Image # 推送镜像，设置版本为latest
+        run: docker push ${{ secrets.DOCKER_REPOSITORY }}:latest
+  pull-docker: # docker部署
+    needs: [build]
+    name: Pull Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }} # 服务器ip
+          username: ${{ secrets.HOST_USERNAME }} # 服务器登录用户名
+          password: ${{ secrets.HOST_PASSWORD }} # 服务器登录密码
+          port: ${{ secrets.HOST_PORT }} # 服务器ssh端口
+          script: |
+              # 停止旧版容器
+            docker stop $(docker ps --filter ancestor=${{ secrets.DOCKER_REPOSITORY }} -q)
+            # 删除旧版容器
+            docker rm -f $(docker ps -a --filter ancestor=${{ secrets.DOCKER_REPOSITORY }}:latest -q)
+            # 删除旧版镜像
+            docker rmi -f $(docker images ${{ secrets.DOCKER_REPOSITORY }}:latest -q)
+            # 登录阿里云镜像服务器
+            docker login --username=${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+            # 拉取最新latest版本镜像
+            docker pull ${{ secrets.DOCKER_REPOSITORY }}:latest
+            # 运行最新latest版本镜像
+            docker run -d -p 8000:4000 ${{ secrets.DOCKER_REPOSITORY }}:latest
+```

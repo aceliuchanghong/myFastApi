@@ -1,22 +1,23 @@
-name: myFastApi Docker Image CI
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: pull the Docker image
-      run : docker pull aceliuchanghong/myfastapi_sisconsavior:V1.0
-    - name: run the Docker image
-      run : docker run -d --name myFastApi_start -p 80:80 aceliuchanghong/myfastapi_sisconsavior:V1.0
+#name: myFastApi Docker Image CI
+#
+#on:
+#  push:
+#    branches: [ "main" ]
+#  pull_request:
+#    branches: [ "main" ]
+#
+#jobs:
+#
+#  build:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - uses: actions/checkout@v3
+#    - name: pull the Docker image
+#      run : docker pull aceliuchanghong/myfastapi_sisconsavior:V1.0
+#    - name: run the Docker image
+#      run : docker run -d --name myFastApi_start -p 80:80 aceliuchanghong/myfastapi_sisconsavior:V1.0
 
       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+# tmd,这个原来是任务啊.曹.老子还以为可以白嫖服务器
