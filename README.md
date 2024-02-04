@@ -3,7 +3,7 @@
 ### install
 
 <details>
-<summary>开发使用</summary
+<summary>开发使用</summary>
 
     pip list --format=freeze > requirements.txt
     pip install easy-media-utils --proxy=127.0.0.1:10809
@@ -51,6 +51,8 @@ docker run -d --name myFastApi_start -p 80:80 myfastapi_sisconsavior
     docker inspect aceliuchanghong/myfastapi_sisconsavior
     # 命令将镜像上传到docker hub的仓库
     docker push aceliuchanghong/myfastapi_sisconsavior:V1.0
+    # 拉取
+    docker pull aceliuchanghong/myfastapi_sisconsavior:V1.0
 </details>
 
 ### project

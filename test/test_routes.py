@@ -190,3 +190,8 @@ async def test_login(form_data: OAuth2PasswordRequestForm = Depends()):
 @router2.get('/test/pass_token')
 async def pass_token(username: str = Depends(test_get_user)):
     return {"item_info": username}
+
+# 第十三节:api身份认证
+# 第十四节:api身份认证
+# 第十五节:api身份认证
+# 第十六节:api身份认证

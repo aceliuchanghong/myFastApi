@@ -1,8 +1,6 @@
 import sqlite3
 from sqlite3 import Error
-
 from config import logger
-
 from pydantic import BaseModel
 
 
