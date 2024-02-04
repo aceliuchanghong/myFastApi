@@ -11,8 +11,13 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # 再复制其余的源文件，这些源文件因为是业务逻辑，所以变动的可能性很大，放在最上面构建，而不是放在最开头构建，能够有效地避免这一部分带来的变化，从而利用缓存，节省构建时间。
-COPY * /code/myFastApi
+COPY * /code
 
-# 容器启动命令
-CMD ["uvicorn", "myFastApi.main:app", "--host", "0.0.0.0", "--port", "80"]
+# 让端口2024可用于外界访问
+EXPOSE 2024
 
+# 定义环境变量
+ENV NAME World
+
+# 在容器启动时运行Python脚本
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "2024", "--reload"]

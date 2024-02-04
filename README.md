@@ -10,6 +10,7 @@ pip install easy-media-utils --proxy=127.0.0.1:10809
 
 pip install -r requirements.txt --proxy=127.0.0.1:10809
 
+域名只需要修改godaddy里面的A对应的就可以了
 </details>
 
 
@@ -36,8 +37,9 @@ ffmpeg -version
 ```
 # 之后执行的
 clone 之后 cd myFastApi之后
-docker build -t myimage .
-docker run -d --name myFastApi20240204V1 -p 80:80 myFastApi20240204V1
+docker build -t myfastapi_sisconsavior .
+docker run -d --name myFastApi_start -p 80:2024 myfastapi_sisconsavior
+# docker rmi myfastapi_sisconsavior
 ```
 
 ### project
