@@ -11,7 +11,7 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # 再复制其余的源文件，这些源文件因为是业务逻辑，所以变动的可能性很大，放在最上面构建，而不是放在最开头构建，能够有效地避免这一部分带来的变化，从而利用缓存，节省构建时间。
-COPY * /code
+COPY . /code
 
 # 让端口可用于外界访问
 EXPOSE 80
