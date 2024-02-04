@@ -53,6 +53,8 @@ docker run -d --name myFastApi_start -p 80:80 myfastapi_sisconsavior
     docker push aceliuchanghong/myfastapi_sisconsavior:V1.0
     # 拉取
     docker pull aceliuchanghong/myfastapi_sisconsavior:V1.0
+    # 开始执行
+    docker run -d --name myFastApi_start -p 80:80 aceliuchanghong/myfastapi_sisconsavior:V1.0
 </details>
 
 ### project
