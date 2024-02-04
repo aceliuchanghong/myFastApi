@@ -34,6 +34,7 @@ ffmpeg -version
 ```stucture
 myFastApi/
 |
+├── Dockerfile
 ├── LICENSE
 ├── README.md
 ├── config.py

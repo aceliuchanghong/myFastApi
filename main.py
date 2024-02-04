@@ -9,7 +9,7 @@ from backend_prd.api.routes.auth import auth_router
 from backend_prd.core.database import create_tables
 from backend_prd.core.exception_handlers import *
 from config import templates
-
+# 开始吧
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="frontend_prd/static"), name="static")
 app.add_event_handler("startup", create_tables)
