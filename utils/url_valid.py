@@ -4,11 +4,14 @@ from urllib.parse import urlparse
 import re
 
 
-def openfile(filename):
-    filepath = os.path.join("frontend_prd/templates/docs/", filename)
+def openfile(filename, path=None):
+    if not path:
+        filepath = os.path.join("frontend_prd/templates/docs/", filename)
+    else:
+        filepath = os.path.join(path, filename)
     if not os.path.exists(filepath):
         data = {
-            "text": f"no {filename}.md file"
+            "text": f"no {filename} file"
         }
     else:
         with open(filepath, "r", encoding="utf-8") as input_file:

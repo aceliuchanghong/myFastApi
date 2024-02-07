@@ -6,6 +6,7 @@ from config import templates
 from fastapi import APIRouter, BackgroundTasks
 import os
 from test.test_bg_task import write_log
+from utils.files_deal import custom_sort
 from utils.url_valid import openfile
 
 router = APIRouter()
@@ -101,7 +102,8 @@ def get_docs_list(request: Request):
 @router.get("/Docs/{md_file_name}", response_class=HTMLResponse)
 def get_doc(request: Request, md_file_name: str):
     files = []
-    for filename in os.listdir('frontend_prd/templates/docs'):
+    file_path = 'frontend_prd/templates/docs'
+    for filename in sorted(os.listdir(file_path), key=custom_sort):
         if filename.endswith('.md'):
             file_id = os.path.splitext(filename)[0]
             file_name = file_id.replace('_', ' ').title()
@@ -109,6 +111,21 @@ def get_doc(request: Request, md_file_name: str):
 
     data = openfile(md_file_name + ".md")
     return templates.TemplateResponse("docs/docs_details.html", {"request": request, "files": files, "data": data})
+
+
+@router.get("/Details/{md_file_name}", response_class=HTMLResponse)
+def get_doc(request: Request, md_file_name: str):
+    files = []
+    file_path = 'frontend_prd/templates/not_show_docs'
+    for filename in sorted(os.listdir(file_path), key=custom_sort):
+        if filename.endswith('.md'):
+            file_id = os.path.splitext(filename)[0]
+            file_name = file_id.replace('_', ' ').title()
+            files.append({'id': file_id, 'name': file_name})
+
+    data = openfile(md_file_name + ".md", file_path)
+    return templates.TemplateResponse("not_show_docs/docs_details.html",
+                                      {"request": request, "files": files, "data": data})
 
 
 @router.post("/register")

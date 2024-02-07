@@ -33,7 +33,7 @@ myFastApi/
 │   │   │   ├── image.py
 │   │   │   ├── start.py
 │   │   │   ├── video.py
-│   │   │   └── webpage.py
+│   │   │   └── webpage.py 
 │   │   └── schemas/
 │   │       └── sql_details.py
 │   └── core/
