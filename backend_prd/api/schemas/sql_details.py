@@ -23,6 +23,50 @@ create_table_queries = [
         remark TEXT,
         PRIMARY KEY (user_id, task_type, task_id)
     );
+    """,
+    """
+    -- 用户信息表 (user_info)
+    CREATE TABLE IF NOT EXISTS user_info (
+      user_id TEXT,
+      username TEXT,
+      password_hash TEXT,
+      email TEXT,
+      created_at TEXT,
+      last_login TEXT,
+      last_login_ip TEXT,
+      last_login_mac TEXT,
+      is_active TEXT
+    );
+    """,
+    """
+    -- 用户购买历史表 (purchase_history)
+    CREATE TABLE IF NOT EXISTS purchase_history (
+      purchase_id TEXT,
+      user_id TEXT,
+      product_id TEXT,
+      quantity TEXT,
+      purchase_date TEXT,
+      total_price TEXT,
+      is_successful TEXT
+    );
+    """,
+    """
+    -- 配置信息表 (user_settings)
+    CREATE TABLE IF NOT EXISTS user_settings (
+      setting_id TEXT,
+      user_id TEXT,
+      setting_name TEXT,
+      setting_value TEXT
+    );
+    """,
+    """
+    -- 产品信息表 (product_info)
+    CREATE TABLE IF NOT EXISTS product_info (
+      product_id TEXT,
+      product_name TEXT ,
+      product_description TEXT,
+      price TEXT 
+    );
     """
 ]
 
