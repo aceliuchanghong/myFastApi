@@ -2,7 +2,7 @@ import os
 
 from fastapi import APIRouter, Request, UploadFile, Form, File
 
-from backend_prd.api.schemas import task_insert_sql
+from backend_prd.api.schemas import *
 from backend_prd.core.database import execute_sqlite_sql
 from utils.path_valid import validate_output_path
 
@@ -51,13 +51,16 @@ async def process_info(request: Request, file: UploadFile = File(...), input_tas
     # 拼接完整的文件路径
     file_location = os.path.join(directory, file.filename)
 
-    print(radio_value, checkbox_value)
-    print(basename, extension)
+    # print(radio_value, checkbox_value)
+    # print(basename, extension)
     with open(file_location, "wb+") as file_object:
         file_content = await file.read()  # 使用await来异步读取文件
         file_object.write(file_content)
     execute_sqlite_sql(task_insert_sql, params=(
         input_user_name, 'audio', input_task_name, input_task_name, 'SUC', '0', 'last_modify_time', 'remark'),
                        should_log=True)
-
+    # 插入历史
+    # execute_sqlite_sql(job_log_insert_sql, params=(
+    #     input_user_name, 'audio', input_task_name, input_task_name, 'SUC', '0', 'last_modify_time', 'remark'),
+    #                    should_log=True)
     print({"message": "Upload successful"})

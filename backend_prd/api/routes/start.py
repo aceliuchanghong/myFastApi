@@ -88,6 +88,18 @@ def get_task_info(request: Request, user_id: str):
                                       {"request": request, "task_info": task_info, "tasks_info": tasks_info})
 
 
+@router.post("/Pages/Task/{user_id}/rerun")
+async def rerun_task(user_id: str, task_id: str):
+    # 根据task_id执行重跑操作的逻辑
+    return {"message": f"Task {task_id} rerun successfully for user {user_id}"}
+
+
+@router.post("/Pages/Task/{user_id}/del")
+async def delete_task(user_id: str, task_id: str):
+    # 根据task_id执行删除操作的逻辑
+    return {"message": f"Task {task_id} deleted successfully for user {user_id}"}
+
+
 @router.get("/Docs", response_class=HTMLResponse)
 def get_docs_list(request: Request):
     files = []

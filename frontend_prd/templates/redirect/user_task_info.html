@@ -51,8 +51,10 @@
                                         最后修改时间: {{ task.last_modify_time }}<br>
                                         备注: {{ task.remark }}
                                     </p>
-                                    <a href="#" class="btn btn-primary btn-sm">重跑</a>
-                                    <a href="#" class="btn btn-primary btn-sm">删除</a>
+                                    <a href="#" class="btn btn-primary btn-sm btn-rerun"
+                                       data-task-id="{{ task.task_id }}">重跑</a>
+                                    <a href="#" class="btn btn-primary btn-sm btn-delete"
+                                       data-task-id="{{ task.task_id }}">删除</a>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +66,27 @@
 {% endblock %}
 
 {% block script %}
+    <script>
+        $(document).ready(function () {
+            $(".btn-rerun").click(function () {
+                var task_id = $(this).data('task-id');
+                var user_id = "{{ user_id }}";
+                $.post("/Pages/Task/" + user_id + "/rerun", {task_id: task_id}, function (data, status) {
+                    // 处理成功后的逻辑
+                    location.reload(); // 刷新页面
+                });
+            });
+
+            $(".btn-delete").click(function () {
+                var task_id = $(this).data('task-id');
+                var user_id = "{{ user_id }}";
+                $.post("/Pages/Task/" + user_id + "/del", {task_id: task_id}, function (data, status) {
+                    // 处理成功后的逻辑
+                    location.reload(); // 刷新页面
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block footer %}
