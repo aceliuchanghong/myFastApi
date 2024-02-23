@@ -140,6 +140,21 @@ def get_doc(request: Request, md_file_name: str):
                                       {"request": request, "files": files, "data": data})
 
 
+@router.get("/Self/{md_file_name}", response_class=HTMLResponse)
+def get_doc2(request: Request, md_file_name: str):
+    files = []
+    file_path = 'frontend_prd/templates/self_docs'
+    for filename in sorted(os.listdir(file_path), key=custom_sort):
+        if filename.endswith('.md'):
+            file_id = os.path.splitext(filename)[0]
+            file_name = file_id.replace('_', ' ').title()
+            files.append({'id': file_id, 'name': file_name})
+
+    data = openfile(md_file_name + ".md", file_path)
+    return templates.TemplateResponse("self_docs/docs_details.html",
+                                      {"request": request, "files": files, "data": data})
+
+
 @router.post("/register")
 def register(username: str = Form(...), password: str = Form(...)):
     # Your registration logic here

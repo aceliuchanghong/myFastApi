@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+{% block Main %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                {% for file in files %}
+                <a class="nav-link" id="{{ file.id }}-tab" href="/Self/{{ file.id }}" role="tab"
+                   aria-controls="{{ file.id }}" aria-selected="true">{{ file.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col">
+                    <br><br>
+                    {{data.text|safe}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="position-relative" id="footer-main">
+    <div class="footer pt-lg-7">
+        <div class="container pt-4"> {% include 'base/base_footer2.html' %}</div>
+    </div>
+</footer>
+{% endblock %}
