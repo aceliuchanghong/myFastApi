@@ -18,6 +18,8 @@ conda create -n myfastapi2 python=3.9.6
 
 conda activate myfastapi2
 
+cd myFastApi/
+
 pip install -r requirements.txt
 
 ### ffmpeg
@@ -33,9 +35,11 @@ ffmpeg -version
 ### docker install
 
 ```
-cd myFastApi
-docker build -t myfastapi_sisconsavior .
-docker run -d --name myFastApi_start -p 80:80 myfastapi_sisconsavior
+git clone https://github.com/aceliuchanghong/myFastApi.git
+cd myFastApi/
+# 只需要安装docker就好了
+sudo docker build -t myfastapi_sisconsavior .
+sudo docker run -d --name myFastApi_start -p 80:80 myfastapi_sisconsavior
 # docker rmi myfastapi_sisconsavior
 # http://9zhouwei.com/
 ```
